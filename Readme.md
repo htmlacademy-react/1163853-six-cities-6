@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Влад Новак](https://up.htmlacademy.ru/react/6/user/1163853).
-* Наставник: `Неизвестно`.
+* Наставник: [Владимир Турецкий](https://htmlacademy.ru/profile/id439019).
 
 ---
 
