@@ -10,11 +10,7 @@ const App = ({hotels}) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <ScreenMain
-            hotels={hotels}
-          />
-        </Route>
+        <Route exact path="/" render={() => <ScreenMain hotels={hotels}/>} />
         <Route exact path="/login" component={ScreenLogin}/>
         <Route>
           <h2>WHAT THE HELL IS GOING ON HERE</h2>
