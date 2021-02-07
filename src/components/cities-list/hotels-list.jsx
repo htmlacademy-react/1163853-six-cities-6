@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {hotelSrtucture} from '../../utils/validator.prop';
+import {hotelSrtucture} from '../../utils/types';
 import Hotel from '../hotel/hotel';
 
 const HotelsList = ({hotels}) => {
@@ -10,7 +10,7 @@ const HotelsList = ({hotels}) => {
       {
         hotels.map(({id, title, isPremium, image, price, isFavorite, type, rating}) => (
           <Hotel
-            key={`${id}-${title}`}
+            key={`${id}`}
             title={title}
             isPremium={isPremium}
             image={image}

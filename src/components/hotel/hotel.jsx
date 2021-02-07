@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {RATING_MULTIPLIER} from '../../utils/constants';
 
 const Hotel = ({isPremium, title, image, price, isFavorite, type, rating}) => {
-  const styleWidth = {width: `${rating * 20}%`};
+  const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
   return (
     <article className="cities__place-card place-card">
       {isPremium && <div className="place-card__mark">
@@ -31,7 +32,7 @@ const Hotel = ({isPremium, title, image, price, isFavorite, type, rating}) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={styleWidth}></span>
+            <span style={styleRating}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

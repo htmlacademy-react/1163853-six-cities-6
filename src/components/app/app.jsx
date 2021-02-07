@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ScreenMain from '../screen-main/screen-main';
-import {hotelSrtucture} from '../../utils/validator.prop';
+import {hotelSrtucture} from '../../utils/types';
 
 const App = ({hotels}) => {
   return (
