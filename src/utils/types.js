@@ -4,7 +4,7 @@ export const hotelSrtucture = PropTypes.shape({
   id: PropTypes.string.isRequired,
   cityName: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
   preview: PropTypes.string.isRequired,
   isPremium: PropTypes.bool.isRequired,
   isFavorite: PropTypes.bool.isRequired,

@@ -8,12 +8,12 @@ const HotelsList = ({hotels}) => {
   return (
     <div className="cities__places-list places__list tabs__content">
       {
-        hotels.map(({id, title, isPremium, image, price, isFavorite, type, rating}) => (
+        hotels.map(({id, title, isPremium, preview, price, isFavorite, type, rating}) => (
           <Hotel
             key={`${id}`}
             title={title}
             isPremium={isPremium}
-            image={image}
+            preview={preview}
             price={price}
             isFavorite={isFavorite}
             type={type}

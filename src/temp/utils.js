@@ -7,7 +7,7 @@ export const LIST_OF_HOTELS = [`Residence Charles Floquet`, `Odeon Hotel`, `Hyat
   `Eurostars Central`, `Catalonia Gran Via`, `Ganivet`, `Hotel Liabeny`, `Hotel Urban`,
   `Hotel Cortezo`, `Hotel Arthur`, `Lapland Hotels Bulevardi`, `Clarion Hotel`, `Hotel Finn`,
   `Marski by Scandic`, `GLO Hotel Art`, `Hotel Klaus K`, `Hotel F6`, `Hotel Rantapuisto`,
-  `Scandic Grand Marina`, `Art Deco Imperial Hotel`, `Top Wenceslas Square`
+  `Scandic Grand Marina`, `Art Deco Imperial Hotel`, `Top Wenceslas Square`, `Maximilian Hotel`
 ];
 
 export const HOST_LIST = [
@@ -56,5 +56,17 @@ export const getRandomItem = (mocks) => shuffle(mocks)[0];
 export const getSomeRandomItems = (mocks) => shuffle(mocks).slice(0, getRandomInteger(1, mocks.length - 1));
 
 export const getImage = (title) => `img/${title}.webp`;
+
+const getStaticImages = () => {
+  const images = [];
+  for (let i = 0; i < 5; i++) {
+    images.push(`img/newHotel-${i}.webp`);
+  }
+
+  return images;
+};
+
+// Возвращает массив из шести картинок, в которых первая - уникальная, остальные пять - статичные, чтобы не множить моки
+export const getImages = (title) => [getImage(title), ...getStaticImages()];
 
 export const getAvatar = (title) => `img/${title}.jpg`;

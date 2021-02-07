@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {RATING_MULTIPLIER} from '../../utils/constants';
 
-const Hotel = ({isPremium, title, image, price, isFavorite, type, rating}) => {
+const Hotel = ({isPremium, title, preview, price, isFavorite, type, rating}) => {
   const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
   return (
     <article className="cities__place-card place-card">
@@ -11,7 +11,7 @@ const Hotel = ({isPremium, title, image, price, isFavorite, type, rating}) => {
       </div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={image} width="260" height="200" alt={`${title} image`} />
+          <img className="place-card__image" src={preview} width="260" height="200" alt={`${title} image`} />
         </a>
       </div>
       <div className="place-card__info">
@@ -48,7 +48,7 @@ const Hotel = ({isPremium, title, image, price, isFavorite, type, rating}) => {
 Hotel.propTypes = {
   isPremium: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  preview: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   isFavorite: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,

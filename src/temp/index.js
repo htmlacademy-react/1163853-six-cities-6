@@ -1,11 +1,22 @@
-import {getID, getAvatar, getImage, getSomeRandomItems, getRandomInteger, getRandomItem, LIST_OF_HOTELS, TYPE_OF_HOTELROOM, HOST_LIST, TYPE_OF_SERVICE} from "./utils";
+import {
+  getID,
+  getAvatar,
+  getImage,
+  getImages,
+  getSomeRandomItems,
+  getRandomInteger,
+  getRandomItem,
+  LIST_OF_HOTELS,
+  TYPE_OF_HOTELROOM,
+  HOST_LIST,
+  TYPE_OF_SERVICE} from "./utils";
 
 class Hotel {
   constructor() {
     this.id = getID();
     this.cityName = `Moscow`;
     this.title = getRandomItem(LIST_OF_HOTELS);
-    this.image = getImage(this.title);
+    this.images = getImages(this.title);
     this.preview = getImage(this.title);
     this.isPremium = Boolean(getRandomInteger());
     this.isFavorite = Boolean(getRandomInteger());
