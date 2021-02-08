@@ -1,31 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {RATING_MULTIPLIER} from '../../utils/constants';
+import {RATING_MULTIPLIER, RenderType} from '../../utils/constants';
 
-const Hotel = ({isPremium, title, preview, price, isFavorite, type, rating}) => {
+const Hotel = ({isPremium, title, preview, price, isFavorite, type, rating, renderType}) => {
   const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
+  const isAllHotels = renderType === RenderType.ALL_HOTELS;
+  const isFavoriteHotels = renderType === RenderType.FAVORITE_HOTELS;
+
   return (
-    <article className="cities__place-card place-card">
-      {isPremium && <div className="place-card__mark">
-        <span>Premium</span>
-      </div>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+    <article className={isAllHotels && `cities__place-card place-card` || isFavoriteHotels && `favorites__card place-card`}>
+      {
+        isPremium && isAllHotels &&
+        (<div className="place-card__mark">
+          <span>Premium</span>
+        </div>)
+      }
+      <div className={isAllHotels && `cities__image-wrapper place-card__image-wrapper` || isFavoriteHotels && `favorites__image-wrapper place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src={preview} width="260" height="200" alt={`${title} image`} />
+          <img
+            className="place-card__image"
+            src={preview}
+            width={isAllHotels && `260` || isFavoriteHotels && `150`}
+            height={isAllHotels && `200` || isFavoriteHotels && `110`} alt={`${title} image`}
+          />
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={`${isFavoriteHotels && `favorites__card-info`} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={
-            `place-card__bookmark-button
-            ${isFavorite && `place-card__bookmark-button--active`}
-            button`} type="button">
+          <button className={`place-card__bookmark-button ${isFavorite && `place-card__bookmark-button--active`} button`} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
+              <use xlinkHref="#icon-bookmark"/>
             </svg>
             <span className="visually-hidden">To bookmarks</span>
           </button>

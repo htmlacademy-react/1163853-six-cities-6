@@ -1,4 +1,4 @@
-export const LIST_OF_HOTELS = [`Residence Charles Floquet`, `Odeon Hotel`, `Hyatt Paris Madeleine`,
+export const TYPE_OF_HOTEL = [`Residence Charles Floquet`, `Odeon Hotel`, `Hyatt Paris Madeleine`,
   `Bermonds Locke`, `Leonardo Royal`, `Dolphin House Serviced Apartments`,
   `Waterloo`, `Elizabeth Hotel`, `Moxy NYC Chelsea`, `Millennium Premier New York Times Square`,
   `WeLive Wall Street`, `InterContinental`, `The Standard`, `Hotel Edison Times Square`,
@@ -23,6 +23,8 @@ export const HOST_LIST = [
 export const TYPE_OF_HOTELROOM = [`Standart`, `Suite`, `De Luxe`, `Duplex`, `Studio`, `Residence`, `Apartament`];
 
 export const TYPE_OF_SERVICE = [`Heating`, `Kitchen`, `Fridge`, `Towels`, `Dishwasher`, `Wi-Fi`, `Washing machine`, `Coffee machine`, `Baby seat`, `Cabel TV`];
+
+export const TYPE_OF_CITY = [`Moscow`, `Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`, `Barcelona`, `Liverpool`];
 
 export const getID = () => {
   return `xxxxxxxx-xxxx-xxxx-yxxx-xxxxxxxxxxxx`.replace(/[xy]/g, (c) => {

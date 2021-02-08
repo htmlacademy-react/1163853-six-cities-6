@@ -6,16 +6,17 @@ import {
   getSomeRandomItems,
   getRandomInteger,
   getRandomItem,
-  LIST_OF_HOTELS,
+  TYPE_OF_HOTEL,
   TYPE_OF_HOTELROOM,
   HOST_LIST,
-  TYPE_OF_SERVICE} from "./utils";
+  TYPE_OF_SERVICE,
+  TYPE_OF_CITY} from "./service";
 
 class Hotel {
   constructor() {
     this.id = getID();
-    this.cityName = `Moscow`;
-    this.title = getRandomItem(LIST_OF_HOTELS);
+    this.city = getRandomItem(TYPE_OF_CITY);
+    this.title = getRandomItem(TYPE_OF_HOTEL);
     this.images = getImages(this.title);
     this.preview = getImage(this.title);
     this.isPremium = Boolean(getRandomInteger());

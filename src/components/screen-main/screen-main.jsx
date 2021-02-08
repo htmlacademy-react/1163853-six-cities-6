@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import HotelsList from '../cities-list/hotels-list';
-import {hotelSrtucture} from '../../utils/types';
+import HotelsList from '../hotels-list/hotels-list';
+import {hotelStructure} from '../../utils/types';
+import {RenderType} from '../../utils/constants';
 
 const ScreenMain = ({hotels}) => {
   return (
@@ -87,7 +88,7 @@ const ScreenMain = ({hotels}) => {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <HotelsList hotels={hotels} />
+              <HotelsList hotels={hotels} renderType={RenderType.ALL_HOTELS}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
@@ -100,7 +101,7 @@ const ScreenMain = ({hotels}) => {
 };
 
 ScreenMain.propTypes = {
-  hotels: PropTypes.arrayOf(hotelSrtucture).isRequired,
+  hotels: PropTypes.arrayOf(hotelStructure).isRequired,
 };
 
 export default ScreenMain;

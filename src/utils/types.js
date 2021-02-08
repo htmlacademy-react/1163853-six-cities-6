@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
-export const hotelSrtucture = PropTypes.shape({
+export const hotelStructure = PropTypes.shape({
   id: PropTypes.string.isRequired,
-  cityName: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   images: PropTypes.arrayOf(PropTypes.string).isRequired,
   preview: PropTypes.string.isRequired,
