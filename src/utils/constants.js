@@ -5,3 +5,7 @@ export const RenderType = {
   ALL_HOTELS: `usual`,
   NEAR_HOTELS: `near`,
 };
+
+export const WarningType = {
+  INVALID_ADDRESS_BAR: `WHAT THE HELL IS GOING ON HERE`,
+};

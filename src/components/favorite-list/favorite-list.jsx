@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {RenderType} from '../../utils/constants';
 import {hotelStructure} from '../../utils/types';
 import {getFavoriteHotelsCollection} from '../../utils';
+
 import HotelsList from '../hotels-list/hotels-list';
 
 const FavoriteList = ({favoriteHotels}) => {

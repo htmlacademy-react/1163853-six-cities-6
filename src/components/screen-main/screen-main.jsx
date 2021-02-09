@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import HotelsList from '../hotels-list/hotels-list';
 import {hotelStructure} from '../../utils/types';
 import {RenderType} from '../../utils/constants';
+
+import HotelsList from '../hotels-list/hotels-list';
 
 const ScreenMain = ({hotels}) => {
   return (

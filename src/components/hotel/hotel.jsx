@@ -1,42 +1,50 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {RATING_MULTIPLIER, RenderType} from '../../utils/constants';
+import {RATING_MULTIPLIER} from '../../utils/constants';
 
-const Hotel = ({isPremium, title, preview, price, isFavorite, type, rating, renderType}) => {
+const Hotel = ({
+  isPremium,
+  title,
+  preview,
+  price,
+  isFavorite,
+  type,
+  rating,
+  isRenderAllHotels,
+  isRenderFavoriteHotels,
+  isRenderNearestHotels
+}) => {
   const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
-  const isAllHotels = renderType === RenderType.ALL_HOTELS;
-  const isFavoriteHotels = renderType === RenderType.FAVORITE_HOTELS;
-  const isNearestHotels = renderType === RenderType.NEAR_HOTELS;
 
   return (
     <article className={
-      isAllHotels && `cities__place-card place-card` ||
-      isFavoriteHotels && `favorites__card place-card` ||
-      isNearestHotels && `near-places__card place-card`
+      isRenderAllHotels && `cities__place-card place-card` ||
+      isRenderFavoriteHotels && `favorites__card place-card` ||
+      isRenderNearestHotels && `near-places__card place-card`
     }>
       {
-        isPremium && isAllHotels && (
+        isPremium && isRenderAllHotels && (
           <div className="place-card__mark">
             <span>Premium</span>
           </div>
         )
       }
       <div className={
-        isAllHotels && `cities__image-wrapper place-card__image-wrapper` ||
-        isFavoriteHotels && `favorites__image-wrapper place-card__image-wrapper` ||
-        isNearestHotels && `near-places__image-wrapper place-card__image-wrapper`
+        isRenderAllHotels && `cities__image-wrapper place-card__image-wrapper` ||
+        isRenderFavoriteHotels && `favorites__image-wrapper place-card__image-wrapper` ||
+        isRenderNearestHotels && `near-places__image-wrapper place-card__image-wrapper`
       }>
         <a href="#">
           <img
             className="place-card__image"
             src={preview}
-            width={(isAllHotels || isNearestHotels) && `260` || isFavoriteHotels && `150`}
-            height={(isAllHotels || isNearestHotels) && `200` || isFavoriteHotels && `110`}
+            width={(isRenderAllHotels || isRenderNearestHotels) && `260` || isRenderFavoriteHotels && `150`}
+            height={(isRenderAllHotels || isRenderNearestHotels) && `200` || isRenderFavoriteHotels && `110`}
             alt={`${title} image`}
           />
         </a>
       </div>
-      <div className={`${isFavoriteHotels && `favorites__card-info`} place-card__info`}>
+      <div className={`${isRenderFavoriteHotels && `favorites__card-info`} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -72,7 +80,9 @@ Hotel.propTypes = {
   isFavorite: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
-  renderType: PropTypes.string.isRequired,
+  isRenderAllHotels: PropTypes.bool.isRequired,
+  isRenderFavoriteHotels: PropTypes.bool.isRequired,
+  isRenderNearestHotels: PropTypes.bool.isRequired,
 };
 
 export default Hotel;

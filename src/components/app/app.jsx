@@ -8,6 +8,7 @@ import ScreenMain from '../screen-main/screen-main';
 import ScreenLogin from '../screen-login/screen-login';
 import ScreenFavorites from '../screen-favorites/screen-favorites';
 import ScreenRoom from '../screen-room/screen-room';
+import Warning from '../warning/warning';
 
 const App = ({hotels}) => {
   return (
@@ -47,7 +48,7 @@ const App = ({hotels}) => {
           )}
         />
         <Route>
-          <h2>WHAT THE HELL IS GOING ON HERE</h2>
+          <Warning />
         </Route>
       </Switch>
     </BrowserRouter>

@@ -15,7 +15,6 @@ import {
 class Hotel {
   constructor(count) {
     this.id = String(count);
-    // this.id = getID();
     this.city = getRandomItem(TYPE_OF_CITY);
     this.title = getRandomItem(TYPE_OF_HOTEL);
     this.images = getImages(this.title);
