@@ -7,9 +7,13 @@ import {RenderType} from '../../utils/constants';
 const HotelsList = ({hotels, renderType}) => {
   const isAllHotels = renderType === RenderType.ALL_HOTELS;
   const isFavoriteHotels = renderType === RenderType.FAVORITE_HOTELS;
+  const isNearestHotels = renderType === RenderType.NEAR_HOTELS;
 
   return (
-    <div className={isAllHotels && `cities__places-list places__list tabs__content` || isFavoriteHotels && `favorites__places`}>
+    <div className={
+      isAllHotels && `cities__places-list places__list tabs__content` ||
+      isFavoriteHotels && `favorites__places` ||
+      isNearestHotels && `near-places__list places__list`}>
       {
         hotels.map(({id, title, isPremium, preview, price, isFavorite, type, rating}) => (
           <Hotel

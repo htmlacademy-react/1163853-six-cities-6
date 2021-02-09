@@ -12,20 +12,18 @@ const FavoriteList = ({favoriteHotels}) => {
       <h1 className="favorites__title">Saved listing</h1>
       <ul className="favorites__list">
         {
-          Object.entries(favoriteHotelsCollection).map(([city, hotels], index) => {
-            return (
-              <li key={`${city}-${index}`} className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href="#">
-                      <span>{city}</span>
-                    </a>
-                  </div>
+          Object.entries(favoriteHotelsCollection).map(([city, hotels], index) => (
+            <li key={`${city}-${index}`} className="favorites__locations-items">
+              <div className="favorites__locations locations locations--current">
+                <div className="locations__item">
+                  <a className="locations__item-link" href="#">
+                    <span>{city}</span>
+                  </a>
                 </div>
-                <HotelsList hotels={hotels} renderType={RenderType.FAVORITE_HOTELS}/>
-              </li>
-            );
-          })
+              </div>
+              <HotelsList hotels={hotels} renderType={RenderType.FAVORITE_HOTELS}/>
+            </li>
+          ))
         }
       </ul>
     </section>

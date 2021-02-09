@@ -13,8 +13,9 @@ import {
   TYPE_OF_CITY} from "./service";
 
 class Hotel {
-  constructor() {
-    this.id = getID();
+  constructor(count) {
+    this.id = String(count);
+    // this.id = getID();
     this.city = getRandomItem(TYPE_OF_CITY);
     this.title = getRandomItem(TYPE_OF_HOTEL);
     this.images = getImages(this.title);
@@ -31,14 +32,19 @@ class Hotel {
     this.hostAvatar = getAvatar(this.hostName);
     this.hostId = getID();
     this.services = getSomeRandomItems(TYPE_OF_SERVICE);
+    this.isHostPro = Boolean(getRandomInteger());
   }
 }
 
 export const generateHotels = (count) => {
   const conditions = [];
   for (let i = 0; i < count; i++) {
-    conditions.push(new Hotel());
+    conditions.push(new Hotel(i));
   }
 
   return conditions;
 };
+
+const mockHotels = generateHotels(20);
+
+export {mockHotels};

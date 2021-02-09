@@ -6,22 +6,33 @@ const Hotel = ({isPremium, title, preview, price, isFavorite, type, rating, rend
   const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
   const isAllHotels = renderType === RenderType.ALL_HOTELS;
   const isFavoriteHotels = renderType === RenderType.FAVORITE_HOTELS;
+  const isNearestHotels = renderType === RenderType.NEAR_HOTELS;
 
   return (
-    <article className={isAllHotels && `cities__place-card place-card` || isFavoriteHotels && `favorites__card place-card`}>
+    <article className={
+      isAllHotels && `cities__place-card place-card` ||
+      isFavoriteHotels && `favorites__card place-card` ||
+      isNearestHotels && `near-places__card place-card`
+    }>
       {
-        isPremium && isAllHotels &&
-        (<div className="place-card__mark">
-          <span>Premium</span>
-        </div>)
+        isPremium && isAllHotels && (
+          <div className="place-card__mark">
+            <span>Premium</span>
+          </div>
+        )
       }
-      <div className={isAllHotels && `cities__image-wrapper place-card__image-wrapper` || isFavoriteHotels && `favorites__image-wrapper place-card__image-wrapper`}>
+      <div className={
+        isAllHotels && `cities__image-wrapper place-card__image-wrapper` ||
+        isFavoriteHotels && `favorites__image-wrapper place-card__image-wrapper` ||
+        isNearestHotels && `near-places__image-wrapper place-card__image-wrapper`
+      }>
         <a href="#">
           <img
             className="place-card__image"
             src={preview}
-            width={isAllHotels && `260` || isFavoriteHotels && `150`}
-            height={isAllHotels && `200` || isFavoriteHotels && `110`} alt={`${title} image`}
+            width={(isAllHotels || isNearestHotels) && `260` || isFavoriteHotels && `150`}
+            height={(isAllHotels || isNearestHotels) && `200` || isFavoriteHotels && `110`}
+            alt={`${title} image`}
           />
         </a>
       </div>
@@ -60,7 +71,8 @@ Hotel.propTypes = {
   price: PropTypes.number.isRequired,
   isFavorite: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired
+  rating: PropTypes.number.isRequired,
+  renderType: PropTypes.string.isRequired,
 };
 
 export default Hotel;
