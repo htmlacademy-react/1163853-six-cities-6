@@ -1,4 +1,4 @@
-export const LIST_OF_HOTELS = [`Residence Charles Floquet`, `Odeon Hotel`, `Hyatt Paris Madeleine`,
+export const TYPE_OF_HOTEL = [`Residence Charles Floquet`, `Odeon Hotel`, `Hyatt Paris Madeleine`,
   `Bermonds Locke`, `Leonardo Royal`, `Dolphin House Serviced Apartments`,
   `Waterloo`, `Elizabeth Hotel`, `Moxy NYC Chelsea`, `Millennium Premier New York Times Square`,
   `WeLive Wall Street`, `InterContinental`, `The Standard`, `Hotel Edison Times Square`,
@@ -7,7 +7,7 @@ export const LIST_OF_HOTELS = [`Residence Charles Floquet`, `Odeon Hotel`, `Hyat
   `Eurostars Central`, `Catalonia Gran Via`, `Ganivet`, `Hotel Liabeny`, `Hotel Urban`,
   `Hotel Cortezo`, `Hotel Arthur`, `Lapland Hotels Bulevardi`, `Clarion Hotel`, `Hotel Finn`,
   `Marski by Scandic`, `GLO Hotel Art`, `Hotel Klaus K`, `Hotel F6`, `Hotel Rantapuisto`,
-  `Scandic Grand Marina`, `Art Deco Imperial Hotel`, `Top Wenceslas Square`
+  `Scandic Grand Marina`, `Art Deco Imperial Hotel`, `Top Wenceslas Square`, `Maximilian Hotel`
 ];
 
 export const HOST_LIST = [
@@ -24,13 +24,7 @@ export const TYPE_OF_HOTELROOM = [`Standart`, `Suite`, `De Luxe`, `Duplex`, `Stu
 
 export const TYPE_OF_SERVICE = [`Heating`, `Kitchen`, `Fridge`, `Towels`, `Dishwasher`, `Wi-Fi`, `Washing machine`, `Coffee machine`, `Baby seat`, `Cabel TV`];
 
-export const getID = () => {
-  return `xxxxxxxx-xxxx-xxxx-yxxx-xxxxxxxxxxxx`.replace(/[xy]/g, (c) => {
-    const r = Math.random() * 16 | 0;
-    const v = c === `x` ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-  });
-};
+export const TYPE_OF_CITY = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
 export const getRandomInteger = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -50,11 +44,32 @@ const shuffle = (originArray) => {
   return originArray;
 };
 
+// получаем уникальный номер объекта
+export const getID = () => {
+  return `xxxxxxxx-xxxx-xxxx-yxxx-xxxxxxxxxxxx`.replace(/[xy]/g, (c) => {
+    const r = Math.random() * 16 | 0;
+    const v = c === `x` ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+};
+
 // Возвращает случайный элемент перемешанного массива
 export const getRandomItem = (mocks) => shuffle(mocks)[0];
 
 export const getSomeRandomItems = (mocks) => shuffle(mocks).slice(0, getRandomInteger(1, mocks.length - 1));
 
 export const getImage = (title) => `img/${title}.webp`;
+
+const getStaticImages = () => {
+  const images = [];
+  for (let i = 0; i < 5; i++) {
+    images.push(`img/newHotel-${i}.webp`);
+  }
+
+  return images;
+};
+
+// Возвращает массив из шести картинок, в которых первая - уникальная, остальные пять - статичные, чтобы не множить моки
+export const getImages = (title) => [getImage(title), ...getStaticImages()];
 
 export const getAvatar = (title) => `img/${title}.jpg`;

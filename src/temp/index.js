@@ -1,11 +1,23 @@
-import {getID, getAvatar, getImage, getSomeRandomItems, getRandomInteger, getRandomItem, LIST_OF_HOTELS, TYPE_OF_HOTELROOM, HOST_LIST, TYPE_OF_SERVICE} from "./utils";
+import {
+  getID,
+  getAvatar,
+  getImage,
+  getImages,
+  getSomeRandomItems,
+  getRandomInteger,
+  getRandomItem,
+  TYPE_OF_HOTEL,
+  TYPE_OF_HOTELROOM,
+  HOST_LIST,
+  TYPE_OF_SERVICE,
+  TYPE_OF_CITY} from "./service";
 
 class Hotel {
-  constructor() {
-    this.id = getID();
-    this.cityName = `Moscow`;
-    this.title = getRandomItem(LIST_OF_HOTELS);
-    this.image = getImage(this.title);
+  constructor(count) {
+    this.id = String(count);
+    this.city = getRandomItem(TYPE_OF_CITY);
+    this.title = getRandomItem(TYPE_OF_HOTEL);
+    this.images = getImages(this.title);
     this.preview = getImage(this.title);
     this.isPremium = Boolean(getRandomInteger());
     this.isFavorite = Boolean(getRandomInteger());
@@ -19,14 +31,19 @@ class Hotel {
     this.hostAvatar = getAvatar(this.hostName);
     this.hostId = getID();
     this.services = getSomeRandomItems(TYPE_OF_SERVICE);
+    this.isHostPro = Boolean(getRandomInteger());
   }
 }
 
 export const generateHotels = (count) => {
   const conditions = [];
   for (let i = 0; i < count; i++) {
-    conditions.push(new Hotel());
+    conditions.push(new Hotel(i));
   }
 
   return conditions;
 };
+
+const mockHotels = generateHotels(20);
+
+export {mockHotels};

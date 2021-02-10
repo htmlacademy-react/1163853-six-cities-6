@@ -1,37 +1,65 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {RATING_MULTIPLIER} from '../../utils/constants';
 
-const Hotel = ({isPremium, title, image, price, isFavorite, type, rating}) => {
-  const styleWidth = {width: `${rating * 20}%`};
+const Hotel = ({
+  isPremium,
+  title,
+  preview,
+  price,
+  isFavorite,
+  type,
+  rating,
+  isRenderAllHotels,
+  isRenderFavoriteHotels,
+  isRenderNearestHotels
+}) => {
+  const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
+
   return (
-    <article className="cities__place-card place-card">
-      {isPremium && <div className="place-card__mark">
-        <span>Premium</span>
-      </div>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+    <article className={
+      isRenderAllHotels && `cities__place-card place-card` ||
+      isRenderFavoriteHotels && `favorites__card place-card` ||
+      isRenderNearestHotels && `near-places__card place-card`
+    }>
+      {
+        isPremium && isRenderAllHotels && (
+          <div className="place-card__mark">
+            <span>Premium</span>
+          </div>
+        )
+      }
+      <div className={
+        isRenderAllHotels && `cities__image-wrapper place-card__image-wrapper` ||
+        isRenderFavoriteHotels && `favorites__image-wrapper place-card__image-wrapper` ||
+        isRenderNearestHotels && `near-places__image-wrapper place-card__image-wrapper`
+      }>
         <a href="#">
-          <img className="place-card__image" src={image} width="260" height="200" alt={`${title} image`} />
+          <img
+            className="place-card__image"
+            src={preview}
+            width={(isRenderAllHotels || isRenderNearestHotels) && `260` || isRenderFavoriteHotels && `150`}
+            height={(isRenderAllHotels || isRenderNearestHotels) && `200` || isRenderFavoriteHotels && `110`}
+            alt={`${title} image`}
+          />
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={`${isRenderFavoriteHotels && `favorites__card-info`} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={
-            `place-card__bookmark-button
-            ${isFavorite && `place-card__bookmark-button--active`}
-            button`} type="button">
+          <button className={`place-card__bookmark-button ${isFavorite && `place-card__bookmark-button--active`} button`} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
+              <use xlinkHref="#icon-bookmark"/>
             </svg>
             <span className="visually-hidden">To bookmarks</span>
           </button>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={styleWidth}></span>
+            <span style={styleRating}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -47,11 +75,14 @@ const Hotel = ({isPremium, title, image, price, isFavorite, type, rating}) => {
 Hotel.propTypes = {
   isPremium: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  preview: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   isFavorite: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired
+  rating: PropTypes.number.isRequired,
+  isRenderAllHotels: PropTypes.bool.isRequired,
+  isRenderFavoriteHotels: PropTypes.bool.isRequired,
+  isRenderNearestHotels: PropTypes.bool.isRequired,
 };
 
 export default Hotel;
