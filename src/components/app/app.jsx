@@ -3,12 +3,9 @@ import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {hotelStructure} from '../../utils/types';
 import {getMatchingOffer} from '../../utils';
+import {JumpTo} from '../../utils/constants';
 
-import ScreenMain from '../screen-main/screen-main';
-import ScreenLogin from '../screen-login/screen-login';
-import ScreenFavorites from '../screen-favorites/screen-favorites';
-import ScreenRoom from '../screen-room/screen-room';
-import Warning from '../warning/warning';
+import {ScreenMain, ScreenLogin, ScreenFavorites, ScreenRoom, Warning} from '../../components';
 
 const App = ({hotels}) => {
   return (
@@ -16,7 +13,7 @@ const App = ({hotels}) => {
       <Switch>
         <Route
           exact
-          path="/"
+          path={JumpTo.ROOT}
           render={() => (
             <ScreenMain
               hotels={hotels}
@@ -25,12 +22,12 @@ const App = ({hotels}) => {
         />
         <Route
           exact
-          path="/login"
+          path={JumpTo.LOGIN}
           component={ScreenLogin}
         />
         <Route
           exact
-          path="/favorites"
+          path={JumpTo.FAVORITES}
           render={() => (
             <ScreenFavorites
               hotels={hotels}
@@ -39,7 +36,7 @@ const App = ({hotels}) => {
         />
         <Route
           exact
-          path="/offer/:id"
+          path={JumpTo.OFFER_ID}
           render={({match}) => (
             <ScreenRoom
               hotel={getMatchingOffer(hotels, match)}

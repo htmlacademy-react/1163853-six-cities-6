@@ -44,6 +44,15 @@ const shuffle = (originArray) => {
   return originArray;
 };
 
+// получаем уникальный номер объекта
+export const getID = () => {
+  return `xxxxxxxx-xxxx-xxxx-yxxx-xxxxxxxxxxxx`.replace(/[xy]/g, (c) => {
+    const r = Math.random() * 16 | 0;
+    const v = c === `x` ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+};
+
 // Возвращает случайный элемент перемешанного массива
 export const getRandomItem = (mocks) => shuffle(mocks)[0];
 
