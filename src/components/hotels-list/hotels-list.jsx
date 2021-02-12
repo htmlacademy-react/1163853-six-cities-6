@@ -15,16 +15,9 @@ const HotelsList = ({hotels, renderType}) => {
       isRenderFavoriteHotels && `favorites__places` ||
       isRenderNearestHotels && `near-places__list places__list`}>
       {
-        hotels.map(({id, title, isPremium, preview, price, isFavorite, type, rating}) => (
-          <Hotel
-            key={id}
-            title={title}
-            isPremium={isPremium}
-            preview={preview}
-            price={price}
-            isFavorite={isFavorite}
-            type={type}
-            rating={rating}
+        hotels.map(({id, ...hotel}) => (
+          <Hotel key={id}
+            {...hotel}
             isRenderAllHotels={isRenderAllHotels}
             isRenderFavoriteHotels={isRenderFavoriteHotels}
             isRenderNearestHotels={isRenderNearestHotels}
