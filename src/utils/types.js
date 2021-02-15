@@ -19,3 +19,14 @@ export const hotelStructure = PropTypes.shape({
   services: PropTypes.arrayOf(PropTypes.string),
   hostIsPro: PropTypes.bool.isRequired
 }).isRequired;
+
+export const reviewStructure = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  quote: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+  visitorId: PropTypes.string.isRequired,
+  visitorName: PropTypes.string.isRequired,
+  visitorAvatar: PropTypes.string.isRequired,
+  visitorIsPro: PropTypes.bool.isRequired
+}).isRequired;

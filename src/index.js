@@ -6,7 +6,6 @@ import App from './components/app/app';
 import {generateComments} from './temp/service';
 
 const hotels = mockHotels;
-
 const comments = generateComments(hotels.length);
 
 ReactDOM.render(

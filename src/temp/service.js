@@ -119,7 +119,7 @@ export const randomDate = (dateX, dateY) => {
 export const generateComments = (count) => {
   const commintsForAllHotels = [];
   for (let i = 0; i < count; i++) {
-    const comments = generateMocks(Comment, getRandomInteger(0, 10));
+    const comments = generateMocks(Comment, getRandomInteger(0, 5));
     commintsForAllHotels.push(comments);
   }
   return commintsForAllHotels;

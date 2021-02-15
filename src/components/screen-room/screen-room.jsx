@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {hotelStructure} from '../../utils/types';
+import {hotelStructure, reviewStructure} from '../../utils/types';
 import {RATING_MULTIPLIER, RenderType} from '../../utils/constants';
 
 import {HotelsList, Logo, Review} from '../../components';
@@ -78,7 +78,7 @@ const ScreenRoom = ({hotel, hotels, comments}) => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={styleRating}></span>
+                  <span style={styleRating} />
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{rating}</span>
@@ -140,7 +140,7 @@ const ScreenRoom = ({hotel, hotels, comments}) => {
               <Review comments={comments} />
             </div>
           </div>
-          <section className="property__map map"></section>
+          <section className="property__map map" />
         </section>
         <div className="container">
           <section className="near-places places">
@@ -156,6 +156,7 @@ const ScreenRoom = ({hotel, hotels, comments}) => {
 ScreenRoom.propTypes = {
   hotel: PropTypes.shape(hotelStructure).isRequired,
   hotels: PropTypes.arrayOf(hotelStructure).isRequired,
+  comments: PropTypes.arrayOf(reviewStructure).isRequired,
 };
 
 export default ScreenRoom;

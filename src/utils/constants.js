@@ -1,4 +1,5 @@
 export const RATING_MULTIPLIER = 20;
+export const FIVE_STARS = [1, 2, 3, 4, 5];
 
 export const RenderType = {
   FAVORITE_HOTELS: `favorite`,
@@ -15,4 +16,9 @@ export const JumpTo = {
   LOGIN: `/login`,
   FAVORITES: `/favorites`,
   OFFER_ID: `/offer/:id`,
+};
+
+export const ReviewLength = {
+  MIN: 49,
+  MAX: 300
 };

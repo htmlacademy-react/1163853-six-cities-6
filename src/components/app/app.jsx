@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
-import {hotelStructure} from '../../utils/types';
+import {hotelStructure, reviewStructure} from '../../utils/types';
 import {getMatchingOffer} from '../../utils';
 import {JumpTo} from '../../utils/constants';
 
 import {ScreenMain, ScreenLogin, ScreenFavorites, ScreenRoom, Warning} from '../../components';
 
 const App = ({hotels, comments}) => {
+
   return (
     <BrowserRouter>
       <Switch>
@@ -41,7 +42,7 @@ const App = ({hotels, comments}) => {
             <ScreenRoom
               hotel={getMatchingOffer(hotels, match)}
               hotels={hotels}
-              comments={comments}
+              comments={comments[match.params.id]}
             />
           )}
         />
@@ -55,6 +56,7 @@ const App = ({hotels, comments}) => {
 
 App.propTypes = {
   hotels: PropTypes.arrayOf(hotelStructure).isRequired,
+  comments: PropTypes.arrayOf(PropTypes.arrayOf(reviewStructure).isRequired).isRequired
 };
 
 export default App;
