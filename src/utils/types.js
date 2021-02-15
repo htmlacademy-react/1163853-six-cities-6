@@ -17,5 +17,5 @@ export const hotelStructure = PropTypes.shape({
   hostName: PropTypes.string.isRequired,
   hostId: PropTypes.string.isRequired,
   services: PropTypes.arrayOf(PropTypes.string),
-  isHostPro: PropTypes.bool.isRequired
+  hostIsPro: PropTypes.bool.isRequired
 }).isRequired;

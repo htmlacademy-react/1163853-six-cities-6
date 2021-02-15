@@ -7,7 +7,7 @@ import {JumpTo} from '../../utils/constants';
 
 import {ScreenMain, ScreenLogin, ScreenFavorites, ScreenRoom, Warning} from '../../components';
 
-const App = ({hotels}) => {
+const App = ({hotels, comments}) => {
   return (
     <BrowserRouter>
       <Switch>
@@ -41,6 +41,7 @@ const App = ({hotels}) => {
             <ScreenRoom
               hotel={getMatchingOffer(hotels, match)}
               hotels={hotels}
+              comments={comments}
             />
           )}
         />

@@ -1,3 +1,5 @@
+import {Comment} from "./comment";
+
 export const TYPE_OF_HOTEL = [`Residence Charles Floquet`, `Odeon Hotel`, `Hyatt Paris Madeleine`,
   `Bermonds Locke`, `Leonardo Royal`, `Dolphin House Serviced Apartments`,
   `Waterloo`, `Elizabeth Hotel`, `Moxy NYC Chelsea`, `Millennium Premier New York Times Square`,
@@ -10,7 +12,7 @@ export const TYPE_OF_HOTEL = [`Residence Charles Floquet`, `Odeon Hotel`, `Hyatt
   `Scandic Grand Marina`, `Art Deco Imperial Hotel`, `Top Wenceslas Square`, `Maximilian Hotel`
 ];
 
-export const HOST_LIST = [
+export const NAMES_LIST = [
   `Cole Rogers`, `Cameron Cox`, `Anthony Nelson`, `Adam Bryant`, `Austin Rogers`,
   `Colin Howard`, `Xavier Murphy`, `Jordan Miller`, `Hunter Harris`, `Thomas Alexander`,
   `Anthony Rivera`, `Charles Turner`, `Devin Gray`, `Timothy Jones`, `Matthew Carter`,
@@ -18,6 +20,22 @@ export const HOST_LIST = [
   `Hayden Griffin`, `Seth Rogers`, `Cameron Evans`, `Alexander Flores`, `David Moore`,
   `Jasmine Barnes`, `Samantha Wood`, `Leah Thomas`, `Melanie Lewis`, `Ashley Edwards`,
   `Isabel Smith`, `Abigail Roberts`, `Jordan Thomas`, `Cole Hall`, `Alex Edwards`
+];
+
+export const LIST_OF_TEXTS = [
+  `Aliquam id erat dolor. Praesent vestibulum porta eros sit amet feugiat.`,
+  `Vestibulum vitae tortor in elit bibendum vehicula ac a felis.`,
+  `Curabitur at eros sollicitudin, bibendum nunc nec, dignissim mi.`,
+  `Nam vehicula luctus erat non ultricies. Mauris volutpat orci a lacus varius mollis.`,
+  `Nunc tempor lectus eu elit mollis placerat. Morbi ut ullamcorper odio.`,
+  `Curabitur facilisis dui purus, at efficitur tortor vulputate vitae.`,
+  `Phasellus purus dolor, sollicitudin ac congue vitae, cursus vel neque.`,
+  `Praesent in congue est. Praesent pulvinar dignissim consequat. Vivamus volutpat congue sem id faucibus.`,
+  `Vivamus pulvinar quis nunc eu maximus. Aliquam non arcu sodales, sodales ligula ac, ullamcorper elit.`,
+  `Integer at euismod massa. Integer mollis erat leo, sit amet porttitor ipsum dapibus quis.`,
+  `Cras sollicitudin felis sit amet diam malesuada pulvinar. Nam condimentum arcu lorem, id dapibus lorem luctus cursus.`,
+  `Praesent leo odio, cursus dictum justo non, efficitur tempor lacus.`,
+  `tiam mollis, sem et laoreet congue, mauris nibh egestas sem, id tristique mi elit non est.`,
 ];
 
 export const TYPE_OF_HOTELROOM = [`Standart`, `Suite`, `De Luxe`, `Duplex`, `Studio`, `Residence`, `Apartament`];
@@ -73,3 +91,36 @@ const getStaticImages = () => {
 export const getImages = (title) => [getImage(title), ...getStaticImages()];
 
 export const getAvatar = (title) => `img/${title}.jpg`;
+
+// Получает тип объекта, который нужно сгенерировать и количество
+// Возвращает массив объектов
+export const generateMocks = (RequiredType, count) => {
+  const conditions = [];
+  for (let i = 0; i < count; i++) {
+    conditions.push(new RequiredType(i));
+  }
+
+  return conditions;
+};
+
+export const randomDate = (dateX, dateY) => {
+  const date1 = new Date(dateX).getTime();
+  const date2 = new Date(dateY).getTime();
+
+  if (date1 > date2) {
+    return new Date(getRandomInteger(date2, date1)).toString();
+  } else {
+    return new Date(getRandomInteger(date1, date2)).toString();
+  }
+};
+
+// Получает количество отелей
+// Возвращает массив, состоящий из массива комментариев для каждого отеля
+export const generateComments = (count) => {
+  const commintsForAllHotels = [];
+  for (let i = 0; i < count; i++) {
+    const comments = generateMocks(Comment, getRandomInteger(0, 10));
+    commintsForAllHotels.push(comments);
+  }
+  return commintsForAllHotels;
+};
