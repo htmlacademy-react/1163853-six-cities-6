@@ -14,15 +14,16 @@ const Hotel = ({
   isRenderAllHotels,
   isRenderFavoriteHotels,
   isRenderNearestHotels,
-  onMouseOverHotel,
-  onMouseLeaveHotel,
+  onClickHotel,
 }) => {
   const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
 
   return (
     <article
-      onMouseOver={() => onMouseOverHotel(id)}
-      onMouseLeave={onMouseLeaveHotel}
+      onClick={(evt) => {
+        evt.preventDefault();
+        onClickHotel(id);
+      }}
       className={
         isRenderAllHotels && `cities__place-card place-card` ||
         isRenderFavoriteHotels && `favorites__card place-card` ||
@@ -88,8 +89,7 @@ Hotel.propTypes = {
   isRenderAllHotels: PropTypes.bool.isRequired,
   isRenderFavoriteHotels: PropTypes.bool.isRequired,
   isRenderNearestHotels: PropTypes.bool.isRequired,
-  onMouseOverHotel: PropTypes.func.isRequired,
-  onMouseLeaveHotel: PropTypes.func.isRequired,
+  onClickHotel: PropTypes.func.isRequired,
 };
 
 export default Hotel;

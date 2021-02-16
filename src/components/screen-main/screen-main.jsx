@@ -5,17 +5,7 @@ import {RenderType} from '../../utils/constants';
 
 import HotelsList from '../hotels-list/hotels-list';
 
-const ScreenMain = ({hotels, onActivatingHotel}) => {
-  const [activeHotel, setActiveHotel] = React.useState(-1);
-
-  const handleMouseOverHotel = (id) => {
-    setActiveHotel(id);
-    onActivatingHotel(activeHotel);
-  };
-
-  const handleMouseLeaveHotel = () => {
-    setActiveHotel(-1);
-  };
+const ScreenMain = ({hotels, onClickHotel}) => {
 
   return (
     <div className="page page--gray page--main">
@@ -103,8 +93,7 @@ const ScreenMain = ({hotels, onActivatingHotel}) => {
               <HotelsList
                 hotels={hotels}
                 renderType={RenderType.ALL_HOTELS}
-                onMouseOverHotel={handleMouseOverHotel}
-                onMouseLeaveHotel={handleMouseLeaveHotel}/>
+                onClickHotel={onClickHotel}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map" />
@@ -118,7 +107,7 @@ const ScreenMain = ({hotels, onActivatingHotel}) => {
 
 ScreenMain.propTypes = {
   hotels: PropTypes.arrayOf(hotelStructure).isRequired,
-  onActivatingHotel: PropTypes.func.isRequired,
+  onClickHotel: PropTypes.func.isRequired,
 };
 
 export default ScreenMain;

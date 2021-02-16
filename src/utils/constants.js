@@ -15,7 +15,7 @@ export const JumpTo = {
   ROOT: `/`,
   LOGIN: `/login`,
   FAVORITES: `/favorites`,
-  OFFER_ID: `/offer/:id`,
+  OFFER: `/offer`,
 };
 
 export const ReviewLength = {

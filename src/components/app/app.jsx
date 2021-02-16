@@ -15,12 +15,12 @@ const App = ({hotels, comments}) => {
         <Route
           exact
           path={JumpTo.ROOT}
-          render={() => (
-            <ScreenMain
+          render={({history}) => {
+            return <ScreenMain
               hotels={hotels}
-              onActivatingHotel={() =>{}}
-            />
-          )}
+              onClickHotel={(id) => history.push(`${JumpTo.OFFER}/${id}`)}
+            />;
+          }}
         />
         <Route
           exact
@@ -30,15 +30,16 @@ const App = ({hotels, comments}) => {
         <Route
           exact
           path={JumpTo.FAVORITES}
-          render={() => (
+          render={({history}) => (
             <ScreenFavorites
               hotels={hotels}
+              onClickHotel={(id) => history.push(`${JumpTo.OFFER}/${id}`)}
             />
           )}
         />
         <Route
           exact
-          path={JumpTo.OFFER_ID}
+          path={`${JumpTo.OFFER}/:id`}
           render={({match}) => (
             <ScreenRoom
               hotel={getMatchingOffer(hotels, match)}

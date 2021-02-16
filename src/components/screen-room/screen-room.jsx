@@ -1,24 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {useHistory} from 'react-router-dom';
 import {hotelStructure, reviewStructure} from '../../utils/types';
-import {RATING_MULTIPLIER, RenderType} from '../../utils/constants';
+import {RATING_MULTIPLIER, RenderType, JumpTo} from '../../utils/constants';
 
 import {HotelsList, Logo, Review} from '../../components';
 
 const ScreenRoom = ({hotel, hotels, comments}) => {
-  const {isPremium, title, isFavorite, price, type, rating, images,
+  const {id, isPremium, title, isFavorite, price, type, rating, images,
     bedrooms, adults, services, hostName, hostIsPro, description} = hotel;
 
   const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
 
-  const [, setActiveHotel] = React.useState(-1);
+  const history = useHistory();
 
-  const handleMouseOverHotel = (id) => {
-    setActiveHotel(id);
-  };
-
-  const handleMouseLeaveHotel = () => {
-    setActiveHotel(-1);
+  const handleClick = (activeHotelID) => {
+    history.push(`${JumpTo.OFFER}/${activeHotelID}`);
   };
 
   return (
@@ -145,10 +142,9 @@ const ScreenRoom = ({hotel, hotels, comments}) => {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <HotelsList
-              hotels={hotels.slice(0, 3)}
+              hotels={hotels.filter((item) => item.id !== id).slice(0, 3)}
               renderType={RenderType.NEAR_HOTELS}
-              onMouseOverHotel={handleMouseOverHotel}
-              onMouseLeaveHotel={handleMouseLeaveHotel}/>
+              onClickHotel={handleClick}/>
           </section>
         </div>
       </main>
