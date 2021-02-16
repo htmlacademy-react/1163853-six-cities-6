@@ -4,7 +4,7 @@ import {hotelStructure} from '../../utils/types';
 import Hotel from '../hotel/hotel';
 import {RenderType} from '../../utils/constants';
 
-const HotelsList = ({hotels, renderType}) => {
+const HotelsList = ({hotels, renderType, onMouseOverHotel, onMouseLeaveHotel}) => {
   const isRenderAllHotels = renderType === RenderType.ALL_HOTELS;
   const isRenderFavoriteHotels = renderType === RenderType.FAVORITE_HOTELS;
   const isRenderNearestHotels = renderType === RenderType.NEAR_HOTELS;
@@ -15,14 +15,18 @@ const HotelsList = ({hotels, renderType}) => {
       isRenderFavoriteHotels && `favorites__places` ||
       isRenderNearestHotels && `near-places__list places__list`}>
       {
-        hotels.map(({id, ...hotel}) => (
-          <Hotel key={id}
-            {...hotel}
-            isRenderAllHotels={isRenderAllHotels}
-            isRenderFavoriteHotels={isRenderFavoriteHotels}
-            isRenderNearestHotels={isRenderNearestHotels}
-          />
-        ))
+        hotels.map((hotel) => {
+          const {id} = hotel;
+          return (
+            <Hotel key={id}
+              {...hotel}
+              isRenderAllHotels={isRenderAllHotels}
+              isRenderFavoriteHotels={isRenderFavoriteHotels}
+              isRenderNearestHotels={isRenderNearestHotels}
+              onMouseOverHotel={onMouseOverHotel}
+              onMouseLeaveHotel={onMouseLeaveHotel}
+            />);
+        })
       }
     </div>
   );
@@ -31,6 +35,8 @@ const HotelsList = ({hotels, renderType}) => {
 HotelsList.propTypes = {
   hotels: PropTypes.arrayOf(hotelStructure).isRequired,
   renderType: PropTypes.string.isRequired,
+  onMouseOverHotel: PropTypes.func.isRequired,
+  onMouseLeaveHotel: PropTypes.func.isRequired,
 };
 
 export default HotelsList;

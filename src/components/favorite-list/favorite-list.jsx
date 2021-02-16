@@ -7,6 +7,16 @@ import {getFavoriteHotelsCollection} from '../../utils';
 import HotelsList from '../hotels-list/hotels-list';
 
 const FavoriteList = ({favoriteHotels}) => {
+  const [, setActiveHotel] = React.useState(-1);
+
+  const handleMouseOverHotel = (id) => {
+    setActiveHotel(id);
+  };
+
+  const handleMouseLeaveHotel = () => {
+    setActiveHotel(-1);
+  };
+
   const favoriteHotelsCollection = getFavoriteHotelsCollection(favoriteHotels);
   return (
     <section className="favorites">
@@ -22,7 +32,11 @@ const FavoriteList = ({favoriteHotels}) => {
                   </a>
                 </div>
               </div>
-              <HotelsList hotels={hotels} renderType={RenderType.FAVORITE_HOTELS}/>
+              <HotelsList
+                hotels={hotels}
+                renderType={RenderType.FAVORITE_HOTELS}
+                onMouseOverHotel={handleMouseOverHotel}
+                onMouseLeaveHotel={handleMouseLeaveHotel}/>
             </li>
           ))
         }

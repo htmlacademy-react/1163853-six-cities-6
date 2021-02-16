@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {RATING_MULTIPLIER} from '../../utils/constants';
 
 const Hotel = ({
+  id,
   isPremium,
   title,
   preview,
@@ -12,22 +13,25 @@ const Hotel = ({
   rating,
   isRenderAllHotels,
   isRenderFavoriteHotels,
-  isRenderNearestHotels
+  isRenderNearestHotels,
+  onMouseOverHotel,
+  onMouseLeaveHotel,
 }) => {
   const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
 
   return (
-    <article className={
-      isRenderAllHotels && `cities__place-card place-card` ||
-      isRenderFavoriteHotels && `favorites__card place-card` ||
-      isRenderNearestHotels && `near-places__card place-card`
-    }>
-      {
-        isPremium && isRenderAllHotels && (
-          <div className="place-card__mark">
-            <span>Premium</span>
-          </div>
-        )
+    <article
+      onMouseOver={() => onMouseOverHotel(id)}
+      onMouseLeave={onMouseLeaveHotel}
+      className={
+        isRenderAllHotels && `cities__place-card place-card` ||
+        isRenderFavoriteHotels && `favorites__card place-card` ||
+        isRenderNearestHotels && `near-places__card place-card`
+      }>
+      {isPremium && isRenderAllHotels && (
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>)
       }
       <div className={
         isRenderAllHotels && `cities__image-wrapper place-card__image-wrapper` ||
@@ -73,6 +77,7 @@ const Hotel = ({
 };
 
 Hotel.propTypes = {
+  id: PropTypes.string.isRequired,
   isPremium: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   preview: PropTypes.string.isRequired,
@@ -83,6 +88,8 @@ Hotel.propTypes = {
   isRenderAllHotels: PropTypes.bool.isRequired,
   isRenderFavoriteHotels: PropTypes.bool.isRequired,
   isRenderNearestHotels: PropTypes.bool.isRequired,
+  onMouseOverHotel: PropTypes.func.isRequired,
+  onMouseLeaveHotel: PropTypes.func.isRequired,
 };
 
 export default Hotel;

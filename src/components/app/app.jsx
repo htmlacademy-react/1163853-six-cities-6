@@ -18,6 +18,7 @@ const App = ({hotels, comments}) => {
           render={() => (
             <ScreenMain
               hotels={hotels}
+              onActivatingHotel={() =>{}}
             />
           )}
         />
