@@ -6,7 +6,8 @@ import {getFavoriteHotelsCollection} from '../../utils';
 
 import HotelsList from '../hotels-list/hotels-list';
 
-const FavoriteList = ({favoriteHotels}) => {
+const FavoriteList = ({favoriteHotels, onClickHotel}) => {
+
   const favoriteHotelsCollection = getFavoriteHotelsCollection(favoriteHotels);
   return (
     <section className="favorites">
@@ -22,7 +23,10 @@ const FavoriteList = ({favoriteHotels}) => {
                   </a>
                 </div>
               </div>
-              <HotelsList hotels={hotels} renderType={RenderType.FAVORITE_HOTELS}/>
+              <HotelsList
+                hotels={hotels}
+                renderType={RenderType.FAVORITE_HOTELS}
+                onClickHotel={onClickHotel}/>
             </li>
           ))
         }
@@ -33,6 +37,7 @@ const FavoriteList = ({favoriteHotels}) => {
 
 FavoriteList.propTypes = {
   favoriteHotels: PropTypes.arrayOf(hotelStructure).isRequired,
+  onClickHotel: PropTypes.func.isRequired,
 };
 
 export default FavoriteList;

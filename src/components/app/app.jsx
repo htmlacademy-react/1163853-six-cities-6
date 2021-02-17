@@ -1,24 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
-import {hotelStructure} from '../../utils/types';
+import {hotelStructure, reviewStructure} from '../../utils/types';
 import {getMatchingOffer} from '../../utils';
 import {JumpTo} from '../../utils/constants';
 
 import {ScreenMain, ScreenLogin, ScreenFavorites, ScreenRoom, Warning} from '../../components';
 
-const App = ({hotels}) => {
+const App = ({hotels, comments}) => {
+
   return (
     <BrowserRouter>
       <Switch>
         <Route
           exact
           path={JumpTo.ROOT}
-          render={() => (
-            <ScreenMain
+          render={({history}) => {
+            return <ScreenMain
               hotels={hotels}
-            />
-          )}
+              onClickHotel={(id) => history.push(`${JumpTo.OFFER}/${id}`)}
+            />;
+          }}
         />
         <Route
           exact
@@ -28,19 +30,21 @@ const App = ({hotels}) => {
         <Route
           exact
           path={JumpTo.FAVORITES}
-          render={() => (
+          render={({history}) => (
             <ScreenFavorites
               hotels={hotels}
+              onClickHotel={(id) => history.push(`${JumpTo.OFFER}/${id}`)}
             />
           )}
         />
         <Route
           exact
-          path={JumpTo.OFFER_ID}
+          path={`${JumpTo.OFFER}/:id`}
           render={({match}) => (
             <ScreenRoom
               hotel={getMatchingOffer(hotels, match)}
               hotels={hotels}
+              comments={comments[match.params.id]}
             />
           )}
         />
@@ -54,6 +58,7 @@ const App = ({hotels}) => {
 
 App.propTypes = {
   hotels: PropTypes.arrayOf(hotelStructure).isRequired,
+  comments: PropTypes.arrayOf(PropTypes.arrayOf(reviewStructure).isRequired).isRequired
 };
 
 export default App;

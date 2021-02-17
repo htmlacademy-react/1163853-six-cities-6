@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {RATING_MULTIPLIER} from '../../utils/constants';
 
 const Hotel = ({
+  id,
   isPremium,
   title,
   preview,
@@ -12,22 +13,26 @@ const Hotel = ({
   rating,
   isRenderAllHotels,
   isRenderFavoriteHotels,
-  isRenderNearestHotels
+  isRenderNearestHotels,
+  onClickHotel,
 }) => {
   const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
 
   return (
-    <article className={
-      isRenderAllHotels && `cities__place-card place-card` ||
-      isRenderFavoriteHotels && `favorites__card place-card` ||
-      isRenderNearestHotels && `near-places__card place-card`
-    }>
-      {
-        isPremium && isRenderAllHotels && (
-          <div className="place-card__mark">
-            <span>Premium</span>
-          </div>
-        )
+    <article
+      onClick={(evt) => {
+        evt.preventDefault();
+        onClickHotel(id);
+      }}
+      className={
+        isRenderAllHotels && `cities__place-card place-card` ||
+        isRenderFavoriteHotels && `favorites__card place-card` ||
+        isRenderNearestHotels && `near-places__card place-card`
+      }>
+      {isPremium && isRenderAllHotels && (
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>)
       }
       <div className={
         isRenderAllHotels && `cities__image-wrapper place-card__image-wrapper` ||
@@ -59,7 +64,7 @@ const Hotel = ({
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={styleRating}></span>
+            <span style={styleRating} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -73,6 +78,7 @@ const Hotel = ({
 };
 
 Hotel.propTypes = {
+  id: PropTypes.string.isRequired,
   isPremium: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   preview: PropTypes.string.isRequired,
@@ -83,6 +89,7 @@ Hotel.propTypes = {
   isRenderAllHotels: PropTypes.bool.isRequired,
   isRenderFavoriteHotels: PropTypes.bool.isRequired,
   isRenderNearestHotels: PropTypes.bool.isRequired,
+  onClickHotel: PropTypes.func.isRequired,
 };
 
 export default Hotel;

@@ -8,9 +8,10 @@ import {
   getRandomItem,
   TYPE_OF_HOTEL,
   TYPE_OF_HOTELROOM,
-  HOST_LIST,
+  NAMES_LIST,
   TYPE_OF_SERVICE,
-  TYPE_OF_CITY} from "./service";
+  TYPE_OF_CITY,
+  generateMocks} from "./service";
 
 class Hotel {
   constructor(count) {
@@ -27,23 +28,14 @@ class Hotel {
     this.rating = getRandomInteger(0, 5);
     this.description = `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century`;
     this.type = getRandomItem(TYPE_OF_HOTELROOM);
-    this.hostName = getRandomItem(HOST_LIST);
+    this.hostName = getRandomItem(NAMES_LIST);
     this.hostAvatar = getAvatar(this.hostName);
     this.hostId = getID();
     this.services = getSomeRandomItems(TYPE_OF_SERVICE);
-    this.isHostPro = Boolean(getRandomInteger());
+    this.hostIsPro = Boolean(getRandomInteger());
   }
 }
 
-export const generateHotels = (count) => {
-  const conditions = [];
-  for (let i = 0; i < count; i++) {
-    conditions.push(new Hotel(i));
-  }
-
-  return conditions;
-};
-
-const mockHotels = generateHotels(20);
+const mockHotels = generateMocks(Hotel, 20);
 
 export {mockHotels};
