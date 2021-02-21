@@ -30,3 +30,12 @@ export const reviewStructure = PropTypes.shape({
   visitorAvatar: PropTypes.string.isRequired,
   visitorIsPro: PropTypes.bool.isRequired
 }).isRequired;
+
+export const cityStructure = {
+  currentCity: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    lat: PropTypes.number.isRequired,
+    lng: PropTypes.number.isRequired,
+  })
+};
+
