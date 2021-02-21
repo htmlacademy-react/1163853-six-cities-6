@@ -7,3 +7,5 @@ export {default as HotelsList} from './hotels-list/hotels-list';
 export {default as Warning} from './warning/warning';
 export {default as Logo} from './logo/logo';
 export {default as Review} from './review/review';
+export {default as PageMain} from './pageMain/pageMain';
+export {default as Map} from './map/map';

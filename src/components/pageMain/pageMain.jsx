@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {RenderType} from '../../utils/constants';
+import {MapType, RenderType} from '../../utils/constants';
 import {hotelStructure, cityStructure} from '../../utils/types';
 
-import HotelsList from '../hotels-list/hotels-list';
-import Map from '../map/map';
+import {HotelsList, Map} from '../../components';
 
 const PageMain = ({currentCity, hotels, onClickHotel}) => {
   return (
@@ -35,6 +34,7 @@ const PageMain = ({currentCity, hotels, onClickHotel}) => {
         </section>
         <div className="cities__right-section">
           <Map
+            mapType={MapType.MAIN_MAP}
             city={currentCity}
             hotels={hotels}/>
         </div>

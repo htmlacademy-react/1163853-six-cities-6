@@ -6,7 +6,7 @@ import {cityStructure, hotelStructure} from '../../utils/types';
 
 import "leaflet/dist/leaflet.css";
 
-const Map = ({city, hotels}) => {
+const Map = ({mapType, city, hotels}) => {
   const {lat, lng} = city;
 
   const mapRef = useRef();
@@ -31,7 +31,7 @@ const Map = ({city, hotels}) => {
     hotels.forEach((point) => {
       const customIcon = leaflet.icon({
         iconUrl: `./img/pin.svg`,
-        iconSize: [30, 30]
+        iconSize: [25, 35]
       });
 
       leaflet.marker({
@@ -51,11 +51,12 @@ const Map = ({city, hotels}) => {
   }, []);
 
   return (
-    <section className="cities__map map" id="map" ref={mapRef} />
+    <section className={`${mapType} map`} id="map" ref={mapRef} />
   );
 };
 
 Map.propTypes = {
+  mapType: PropTypes.string.isRequired,
   city: PropTypes.shape(cityStructure).isRequired,
   hotels: PropTypes.arrayOf(hotelStructure).isRequired,
 };
