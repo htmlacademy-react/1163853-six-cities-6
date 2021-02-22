@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 import {Zoom} from '../../temp/service';
 import {cityStructure, hotelStructure} from '../../utils/types';
+import {MarkerType, NOT_INITIALIZED} from '../../utils/constants';
 
 import "leaflet/dist/leaflet.css";
 
@@ -28,26 +29,30 @@ const Map = ({mapType, city, hotels}) => {
         })
         .addTo(mapRef.current);
 
-    hotels.forEach((point) => {
-      const customIcon = leaflet.icon({
-        iconUrl: `./img/pin.svg`,
-        iconSize: [25, 35]
+    const markers = [];
+    let prevPinID = NOT_INITIALIZED;
+
+    const pin = leaflet.icon(MarkerType.pin);
+    const pinActive = leaflet.icon(MarkerType.pinActive);
+
+    hotels.forEach(({id, latitude, longitude, title}) => {
+      markers[id] = leaflet.marker({lat: latitude, lng: longitude}, {icon: pin})
+        .addTo(mapRef.current)
+        .bindPopup(title);
+
+      markers[id].on(`click`, (evt) => {
+        if (prevPinID !== NOT_INITIALIZED) {
+          markers[prevPinID].setIcon(pin);
+        }
+
+        prevPinID = id;
+        evt.target.setIcon(pinActive);
       });
-
-      leaflet.marker({
-        lat: point.latitude,
-        lng: point.longitude,
-      },
-      {
-        icon: customIcon
-      })
-      .addTo(mapRef.current)
-      .bindPopup(point.title);
-
-      return () => {
-        mapRef.current.remove();
-      };
     });
+
+    return () => {
+      mapRef.current.remove();
+    };
   }, []);
 
   return (
@@ -64,4 +69,5 @@ Map.propTypes = {
 export default Map;
 
 // city - город, на котором карта изначально сфокусирована
-// leaflet.marker - устанавливает маркер
+// leaflet.marker.addTo - устанавливает маркер и привязывает к карте
+// .bindPopup - в него можно передать html разметку как строку и добавить .openPopup для открытия
