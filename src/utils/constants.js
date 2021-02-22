@@ -11,6 +11,7 @@ export const RenderType = {
   FAVORITE_HOTELS: `favorite`,
   ALL_HOTELS: `usual`,
   NEAR_HOTELS: `near`,
+  MAIN_LOGO: `header__logo-link--active`
 };
 
 export const WarningType = {
