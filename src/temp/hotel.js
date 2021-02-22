@@ -11,6 +11,7 @@ import {
   NAMES_LIST,
   TYPE_OF_SERVICE,
   TYPE_OF_CITY,
+  HotelsLocations,
   generateMocks} from "./service";
 
 class Hotel {
@@ -33,6 +34,9 @@ class Hotel {
     this.hostId = getID();
     this.services = getSomeRandomItems(TYPE_OF_SERVICE);
     this.hostIsPro = Boolean(getRandomInteger());
+    this.latitude = getRandomItem(HotelsLocations).lat;
+    this.longitude = getRandomItem(HotelsLocations).lng;
+    this.zoom = getRandomItem(HotelsLocations).zoom;
   }
 }
 

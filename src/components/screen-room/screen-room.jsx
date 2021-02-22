@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 import {hotelStructure, reviewStructure} from '../../utils/types';
-import {RATING_MULTIPLIER, RenderType, JumpTo} from '../../utils/constants';
+import {RATING_MULTIPLIER, RenderType, JumpTo, MapType} from '../../utils/constants';
+import {Cities} from '../../temp/service';
 
-import {HotelsList, Logo, Review} from '../../components';
+import {HotelsList, Logo, Review, Map} from '../../components';
 
 const ScreenRoom = ({hotel, hotels, comments}) => {
   const {id, isPremium, title, isFavorite, price, type, rating, images,
@@ -13,6 +14,7 @@ const ScreenRoom = ({hotel, hotels, comments}) => {
   const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
 
   const history = useHistory();
+  const [currentCity] = React.useState(Cities.Amsterdam);
 
   const handleClick = (activeHotelID) => {
     history.push(`${JumpTo.OFFER}/${activeHotelID}`);
@@ -136,7 +138,10 @@ const ScreenRoom = ({hotel, hotels, comments}) => {
               <Review comments={comments} />
             </div>
           </div>
-          <section className="property__map map" />
+          <Map
+            mapType={MapType.OFFER_MAP}
+            city={currentCity}
+            hotels={hotels}/>
         </section>
         <div className="container">
           <section className="near-places places">

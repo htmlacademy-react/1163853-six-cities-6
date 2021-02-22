@@ -1,5 +1,11 @@
 export const RATING_MULTIPLIER = 20;
+export const NOT_INITIALIZED = -1;
 export const FIVE_STARS = [1, 2, 3, 4, 5];
+
+export const MapType = {
+  MAIN_MAP: `cities__map`,
+  OFFER_MAP: `property__map`,
+};
 
 export const RenderType = {
   FAVORITE_HOTELS: `favorite`,
@@ -21,4 +27,15 @@ export const JumpTo = {
 export const ReviewLength = {
   MIN: 49,
   MAX: 300
+};
+
+export const MarkerType = {
+  pin: {
+    iconUrl: `./img/pin.svg`,
+    iconSize: [25, 35]
+  },
+  pinActive: {
+    iconUrl: `./img/pin-active2.svg`,
+    iconSize: [35, 45]
+  },
 };

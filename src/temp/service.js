@@ -1,5 +1,63 @@
 import {Comment} from "./comment";
 
+export const Zoom = 12;
+
+export const Cities = {
+  Amsterdam: {
+    name: `Amsterdam`,
+    lat: 52.38333,
+    lng: 4.9,
+  },
+};
+
+export const HotelsLocations = [
+  {
+    lat: 52.3909553946508,
+    lng: 4.85309666406198,
+    zoom: Zoom,
+  },
+  {
+    lat: 52.369553943508,
+    lng: 4.85309666406298,
+    zoom: Zoom,
+  },
+  {
+    lat: 52.3309553943528,
+    lng: 4.929309666406498,
+    zoom: Zoom,
+  },
+  {
+    lat: 52.37095753943508,
+    lng: 4.769313667415698,
+    zoom: Zoom,
+  },
+  {
+    lat: 52.3809553983508,
+    lng: 4.859310697415698,
+    zoom: Zoom,
+  },
+  {
+    lat: 52.3602553943508,
+    lng: 4.959310667915698,
+    zoom: Zoom,
+  },
+  {
+    lat: 52.3369553943508,
+    lng: 4.919310667485698,
+    zoom: Zoom,
+  },
+  {
+    lat: 52.3369553943508,
+    lng: 4.739310667485698,
+    zoom: Zoom,
+  },
+  {
+    lat: 52.3569553943508,
+    lng: 4.839310567485698,
+    zoom: Zoom,
+  },
+];
+
 export const TYPE_OF_HOTEL = [`Residence Charles Floquet`, `Odeon Hotel`, `Hyatt Paris Madeleine`,
   `Bermonds Locke`, `Leonardo Royal`, `Dolphin House Serviced Apartments`,
   `Waterloo`, `Elizabeth Hotel`, `Moxy NYC Chelsea`, `Millennium Premier New York Times Square`,
