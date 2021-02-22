@@ -8,14 +8,12 @@ import {getCity} from '../../temp/service';
 import {HotelsList, Review, Map, Header} from '../../components';
 
 const ScreenRoom = ({hotel, hotels, comments}) => {
-  const {id, isPremium, title, isFavorite, price, type, rating, images,
-    bedrooms, adults, services, hostName, hostIsPro, description, cityName} = hotel;
+  const {id, isPremium, title, isFavorite, price, type, rating, images, bedrooms, adults, services, hostName, hostIsPro, description, cityName} = hotel;
+  const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
+  const history = useHistory();
 
   const currentCity = getCity(cityName);
-
-  const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
-
-  const history = useHistory();
+  const threeNearestHotels = hotels.filter((item) => (item.id !== id) && (item.cityName === currentCity.name)).slice(0, 3);
 
   const handleClick = (activeHotelID) => {
     history.push(`${JumpTo.OFFER}/${activeHotelID}`);
@@ -124,13 +122,13 @@ const ScreenRoom = ({hotel, hotels, comments}) => {
           <Map
             mapType={MapType.OFFER_MAP}
             city={currentCity}
-            hotels={hotels}/>
+            hotels={[hotel, ...threeNearestHotels]}/>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <HotelsList
-              hotels={hotels.filter((item) => item.id !== id).slice(0, 3)}
+              hotels={threeNearestHotels}
               renderType={RenderType.NEAR_HOTELS}
               onClickHotel={handleClick}/>
           </section>
