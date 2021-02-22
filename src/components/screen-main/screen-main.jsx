@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import {hotelStructure} from '../../utils/types';
 import {Cities} from '../../temp/service';
 
-import PageMain from '../pageMain/pageMain';
-import PageMainEmpty from '../pageMainEmpty/pageMainEmpty';
+import {Places, NoPlaces} from '../../components';
 
 const ScreenMain = ({hotels, onClickHotel}) => {
   const [currentCity] = React.useState(Cities.Amsterdam);
@@ -72,7 +71,7 @@ const ScreenMain = ({hotels, onClickHotel}) => {
             </ul>
           </section>
         </div>
-        {hotels.length ? <PageMain currentCity={currentCity} hotels={hotels} onClickHotel={onClickHotel} /> : <PageMainEmpty />}
+        {hotels.length ? <Places currentCity={currentCity} hotels={hotels} onClickHotel={onClickHotel} /> : <NoPlaces />}
       </main>
     </div>
   );

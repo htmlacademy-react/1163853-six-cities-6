@@ -5,7 +5,7 @@ import {hotelStructure, cityStructure} from '../../utils/types';
 
 import {HotelsList, Map} from '../../components';
 
-const PageMain = ({currentCity, hotels, onClickHotel}) => {
+const Places = ({currentCity, hotels, onClickHotel}) => {
   return (
     <div className="cities">
       <div className="cities__places-container container">
@@ -43,10 +43,10 @@ const PageMain = ({currentCity, hotels, onClickHotel}) => {
   );
 };
 
-PageMain.propTypes = {
+Places.propTypes = {
   hotels: PropTypes.arrayOf(hotelStructure).isRequired,
   onClickHotel: PropTypes.func.isRequired,
   currentCity: PropTypes.shape(cityStructure).isRequired,
 };
 
-export default PageMain;
+export default Places;
