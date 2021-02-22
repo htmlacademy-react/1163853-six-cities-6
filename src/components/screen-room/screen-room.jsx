@@ -3,18 +3,19 @@ import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 import {hotelStructure, reviewStructure} from '../../utils/types';
 import {RATING_MULTIPLIER, RenderType, JumpTo, MapType} from '../../utils/constants';
-import {Cities} from '../../temp/service';
+import {getCity} from '../../temp/service';
 
 import {HotelsList, Review, Map, Header} from '../../components';
 
 const ScreenRoom = ({hotel, hotels, comments}) => {
   const {id, isPremium, title, isFavorite, price, type, rating, images,
-    bedrooms, adults, services, hostName, hostIsPro, description} = hotel;
+    bedrooms, adults, services, hostName, hostIsPro, description, cityName} = hotel;
+
+  const currentCity = getCity(cityName);
 
   const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
 
   const history = useHistory();
-  const [currentCity] = React.useState(Cities.Amsterdam);
 
   const handleClick = (activeHotelID) => {
     history.push(`${JumpTo.OFFER}/${activeHotelID}`);
