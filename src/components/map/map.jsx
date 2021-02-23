@@ -9,7 +9,6 @@ import "leaflet/dist/leaflet.css";
 
 const Map = ({mapType, city, hotels}) => {
   const {lat, lng} = city;
-
   const mapRef = useRef();
 
   useEffect(() => {
@@ -53,7 +52,7 @@ const Map = ({mapType, city, hotels}) => {
     return () => {
       mapRef.current.remove();
     };
-  }, []);
+  }, [lat, lng]);
 
   return (
     <section className={`${mapType} map`} id="map" ref={mapRef} />
@@ -71,3 +70,4 @@ export default Map;
 // city - город, на котором карта изначально сфокусирована
 // leaflet.marker.addTo - устанавливает маркер и привязывает к карте
 // .bindPopup - в него можно передать html разметку как строку и добавить .openPopup для открытия
+// для того, чтобы вывести координаты клика, нужно описать функцию mapRef.current.on, затем вытянуть evt.latlng.lat и evt.latlng.lng

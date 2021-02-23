@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PageMainEmpty = () => {
+const NoPlaces = () => {
   return (
     <div className="cities">
       <div className="cities__places-container cities__places-container--empty container">
@@ -16,4 +16,4 @@ const PageMainEmpty = () => {
   );
 };
 
-export default PageMainEmpty;
+export default NoPlaces;

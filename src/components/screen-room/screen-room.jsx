@@ -3,18 +3,17 @@ import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 import {hotelStructure, reviewStructure} from '../../utils/types';
 import {RATING_MULTIPLIER, RenderType, JumpTo, MapType} from '../../utils/constants';
-import {Cities} from '../../temp/service';
+import {getCity} from '../../temp/service';
 
-import {HotelsList, Logo, Review, Map} from '../../components';
+import {HotelsList, Review, Map, Header} from '../../components';
 
 const ScreenRoom = ({hotel, hotels, comments}) => {
-  const {id, isPremium, title, isFavorite, price, type, rating, images,
-    bedrooms, adults, services, hostName, hostIsPro, description} = hotel;
-
+  const {id, isPremium, title, isFavorite, price, type, rating, images, bedrooms, adults, services, hostName, hostIsPro, description, cityName} = hotel;
   const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
-
   const history = useHistory();
-  const [currentCity] = React.useState(Cities.Amsterdam);
+
+  const currentCity = getCity(cityName);
+  const threeNearestHotels = hotels.filter((item) => (item.id !== id) && (item.cityName === currentCity.name)).slice(0, 3);
 
   const handleClick = (activeHotelID) => {
     history.push(`${JumpTo.OFFER}/${activeHotelID}`);
@@ -22,25 +21,7 @@ const ScreenRoom = ({hotel, hotels, comments}) => {
 
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <Logo />
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__login">Sign in</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
-
+      <Header />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
@@ -141,13 +122,13 @@ const ScreenRoom = ({hotel, hotels, comments}) => {
           <Map
             mapType={MapType.OFFER_MAP}
             city={currentCity}
-            hotels={hotels}/>
+            hotels={[hotel, ...threeNearestHotels]}/>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <HotelsList
-              hotels={hotels.filter((item) => item.id !== id).slice(0, 3)}
+              hotels={threeNearestHotels}
               renderType={RenderType.NEAR_HOTELS}
               onClickHotel={handleClick}/>
           </section>
