@@ -1,10 +1,11 @@
 import {extend} from '../../utils';
 import {ActionType} from '../action';
+import {City} from '../../temp/city';
 
 const initialState = {
   cities: [],
   hotels: [],
-  activeCity: -1,
+  activeCity: City.PARIS,
 };
 
 const reducer = (state = initialState, action) => {
