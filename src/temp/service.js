@@ -1,26 +1,4 @@
-import {City, getCity} from "./city";
 import {Comment} from "./comment";
-
-export const Zoom = 12;
-
-// Получает диапазон чисел
-// Возвращает случайное число с плавающей точкой
-const getRandomArbitrary = (min, max) => {
-  return Math.random() * (max - min) + min;
-};
-
-// Получает название города
-// Возвращает случайные широту и долготу отеля для указанного города
-export const getRandomHotelLocation = (city) => {
-  const {lat, lng} = getCity(city);
-  const latMin = lat - 0.06;
-  const latMax = lat + 0.06;
-  const latitude = getRandomArbitrary(latMin, latMax);
-  const lngMin = lng - 0.08;
-  const lngMax = lng + 0.08;
-  const longitude = getRandomArbitrary(lngMin, lngMax);
-  return {latitude, longitude};
-};
 
 export const TYPE_OF_HOTEL = [`Residence Charles Floquet`, `Odeon Hotel`, `Hyatt Paris Madeleine`,
   `Bermonds Locke`, `Leonardo Royal`, `Dolphin House Serviced Apartments`,
@@ -97,11 +75,6 @@ export const getRandomItem = (mocks) => shuffle(mocks)[0];
 export const getSomeRandomItems = (mocks) => shuffle(mocks).slice(0, getRandomInteger(1, mocks.length - 1));
 
 export const getImage = (title) => `img/${title}.webp`;
-
-export const getRandomCity = () => {
-  const XXX = getRandomItem(Object.values(City));
-  return XXX;
-};
 
 const getStaticImages = () => {
   const images = [];

@@ -1,9 +1,9 @@
 import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
-import {Zoom} from '../../temp/service';
 import {cityStructure, hotelStructure} from '../../utils/types';
 import {MarkerType, NOT_INITIALIZED} from '../../utils/constants';
+import {Zoom} from '../../temp/city';
 
 import "leaflet/dist/leaflet.css";
 

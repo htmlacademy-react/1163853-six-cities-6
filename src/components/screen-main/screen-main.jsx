@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {hotelStructure} from '../../utils/types';
+import {connect} from 'react-redux';
+import {cityStructure, hotelStructure} from '../../utils/types';
 import {RenderType} from '../../utils/constants';
 import {City, getCity} from '../../temp/city';
+import {ActionCreator} from '../../store/action';
 
 import {Places, NoPlaces, Header} from '../../components';
 
-const ScreenMain = ({hotels, onClickHotel}) => {
-  const [currentCity, setCurrentCity] = React.useState(getCity(`Paris`));
+const ScreenMain = ({hotels, onClickHotel, activeCity, onClickTabLocation}) => {
 
   // Эмуляция отсутствия отелей в Дюссельдорфе
-  const hotelsFilteredByCity = (currentCity.name === `Dusseldorf`) ? [] : hotels.filter(({cityName}) => cityName === currentCity.name);
+  const hotelsFilteredByCity = (activeCity.name === `Dusseldorf`) ? [] : hotels.filter(({cityName}) => cityName === activeCity.name);
 
   return (
     <div className="page page--gray page--main">
@@ -27,9 +28,9 @@ const ScreenMain = ({hotels, onClickHotel}) => {
                       <a
                         onClick={(evt) => {
                           evt.preventDefault();
-                          setCurrentCity(getCity(city));
+                          onClickTabLocation(getCity(city));
                         }}
-                        className={`locations__item-link tabs__item ${(currentCity.name === city) && `tabs__item--active`}`}>
+                        className={`locations__item-link tabs__item ${(activeCity.name === city) && `tabs__item--active`}`}>
                         <span>{city}</span>
                       </a>
                     </li>
@@ -39,7 +40,7 @@ const ScreenMain = ({hotels, onClickHotel}) => {
             </ul>
           </section>
         </div>
-        {hotelsFilteredByCity.length ? <Places currentCity={currentCity} hotels={hotelsFilteredByCity} onClickHotel={onClickHotel} /> : <NoPlaces />}
+        {hotelsFilteredByCity.length ? <Places currentCity={activeCity} hotels={hotelsFilteredByCity} onClickHotel={onClickHotel} /> : <NoPlaces />}
       </main>
     </div>
   );
@@ -48,6 +49,19 @@ const ScreenMain = ({hotels, onClickHotel}) => {
 ScreenMain.propTypes = {
   hotels: PropTypes.arrayOf(hotelStructure).isRequired,
   onClickHotel: PropTypes.func.isRequired,
+  activeCity: PropTypes.shape(cityStructure).isRequired,
+  onClickTabLocation: PropTypes.func.isRequired,
 };
 
-export default ScreenMain;
+const mapStateToProps = (state) => ({
+  activeCity: state.activeCity,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onClickTabLocation(newSelectedCity) {
+    dispatch(ActionCreator.setActiveCity(newSelectedCity));
+  }
+});
+
+export {ScreenMain};
+export default connect(mapStateToProps, mapDispatchToProps)(ScreenMain);

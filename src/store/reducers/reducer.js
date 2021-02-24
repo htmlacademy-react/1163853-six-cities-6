@@ -1,11 +1,10 @@
 import {extend} from '../../utils';
 import {ActionType} from '../action';
-import {City} from '../../temp/city';
+import {City, getCity} from '../../temp/city';
 
 const initialState = {
-  cities: [],
   hotels: [],
-  activeCity: City.PARIS,
+  activeCity: getCity(City.PARIS),
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,10 +12,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_HOTELS:
       return extend(state, {
         hotels: action.payload,
-      });
-    case ActionType.SET_CITIES:
-      return extend(state, {
-        cities: action.payload,
       });
     case ActionType.SET_ACTIVE_CITY:
       return extend(state, {
