@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {hotelStructure} from '../../utils/types';
-import {City, getCity} from '../../temp/service';
 import {RenderType} from '../../utils/constants';
+import {City, getCity} from '../../temp/city';
 
 import {Places, NoPlaces, Header} from '../../components';
 

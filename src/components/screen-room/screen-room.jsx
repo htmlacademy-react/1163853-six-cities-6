@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 import {hotelStructure, reviewStructure} from '../../utils/types';
 import {RATING_MULTIPLIER, RenderType, JumpTo, MapType} from '../../utils/constants';
-import {getCity} from '../../temp/service';
+import {getCity} from '../../temp/city';
 
 import {HotelsList, Review, Map, Header} from '../../components';
 

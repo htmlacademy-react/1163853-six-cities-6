@@ -9,3 +9,7 @@ export const getFavoriteHotelsCollection = (hotels) => hotels.reduce((total, hot
 export const getMatchingOffer = (hotels, {params}) => {
   return hotels.find(({id}) => id === params.id);
 };
+
+// Принимает два аргумента
+// Возвращает объект с добавленными, в качестве полей, аргументами
+export const extend = (a, b) => Object.assign({}, a, b);
