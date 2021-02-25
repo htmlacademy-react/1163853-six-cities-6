@@ -40,3 +40,5 @@ export const MarkerType = {
     iconSize: [35, 45]
   },
 };
+
+export const CitiesList = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];

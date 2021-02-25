@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import {ActionCreator} from '../../store/action';
 import {connect} from 'react-redux';
 import {cityStructure, hotelStructure} from '../../utils/types';
-import {RenderType} from '../../utils/constants';
-import {City, getCity} from '../../temp/city';
-import {getFilteredHotels} from '../../utils';
+import {CitiesList, RenderType} from '../../utils/constants';
+import {getFilteredHotels, getPlace} from '../../utils';
 
 import {Places, NoPlaces, Header} from '../../components';
 
@@ -22,20 +21,18 @@ const ScreenMain = ({hotels, onClickHotel, activeCity, onClickTabLocation}) => {
           <section className="locations container">
             <ul className="locations__list tabs__list">
               {
-                Object.values(City).map((city) => {
-                  return (
-                    <li key={city} className="locations__item">
-                      <a
-                        onClick={(evt) => {
-                          evt.preventDefault();
-                          onClickTabLocation(getCity(city));
-                        }}
-                        className={`locations__item-link tabs__item ${(activeCity.name === city) && `tabs__item--active`}`}>
-                        <span>{city}</span>
-                      </a>
-                    </li>
-                  );
-                })
+                CitiesList.map((currentCityName) => (
+                  <li key={currentCityName} className="locations__item">
+                    <a
+                      onClick={(evt) => {
+                        evt.preventDefault();
+                        onClickTabLocation(getPlace(hotels, currentCityName));
+                      }}
+                      className={`locations__item-link tabs__item ${(activeCity.name === currentCityName) && `tabs__item--active`}`}>
+                      <span>{currentCityName}</span>
+                    </a>
+                  </li>
+                ))
               }
             </ul>
           </section>

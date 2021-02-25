@@ -1,12 +1,12 @@
-import {extend} from '../../utils';
+import {extend, getPlace} from '../../utils';
 import {ActionType} from '../action';
-import {City, getCity} from '../../temp/city';
 import {mockHotels} from '../../temp/hotel';
 import {mockComments} from '../../temp/comment';
+import {CitiesList} from '../../utils/constants';
 
 const initialState = {
   hotels: mockHotels,
-  activeCity: getCity(City.PARIS),
+  activeCity: getPlace(mockHotels, CitiesList[0]),
   comments: mockComments,
 };
 
