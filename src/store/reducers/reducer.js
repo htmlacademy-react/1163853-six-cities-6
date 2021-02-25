@@ -1,10 +1,13 @@
 import {extend} from '../../utils';
 import {ActionType} from '../action';
 import {City, getCity} from '../../temp/city';
+import {mockHotels} from '../../temp/hotel';
+import {mockComments} from '../../temp/comment';
 
 const initialState = {
-  hotels: [],
+  hotels: mockHotels,
   activeCity: getCity(City.PARIS),
+  comments: mockComments,
 };
 
 const reducer = (state = initialState, action) => {
@@ -17,9 +20,9 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         activeCity: action.payload,
       });
+    default:
+      return state;
   }
-
-  return state;
 };
 
 export {reducer};

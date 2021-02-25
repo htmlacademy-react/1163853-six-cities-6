@@ -1,4 +1,4 @@
-import {Comment} from "./comment";
+export const amountOfTempData = 40;
 
 export const TYPE_OF_HOTEL = [`Residence Charles Floquet`, `Odeon Hotel`, `Hyatt Paris Madeleine`,
   `Bermonds Locke`, `Leonardo Royal`, `Dolphin House Serviced Apartments`,
@@ -114,11 +114,11 @@ export const randomDate = (dateX, dateY) => {
 
 // Получает количество отелей
 // Возвращает массив, состоящий из массива комментариев для каждого отеля
-export const generateComments = (count) => {
-  const commintsForAllHotels = [];
+export const generateComments = (commentTypeObject, count) => {
+  const commentsForAllHotels = [];
   for (let i = 0; i < count; i++) {
-    const comments = generateMocks(Comment, getRandomInteger(0, 5));
-    commintsForAllHotels.push(comments);
+    const comments = generateMocks(commentTypeObject, getRandomInteger(0, 5));
+    commentsForAllHotels.push(comments);
   }
-  return commintsForAllHotels;
+  return commentsForAllHotels;
 };

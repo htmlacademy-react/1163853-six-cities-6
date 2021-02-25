@@ -10,7 +10,8 @@ import {
   TYPE_OF_HOTELROOM,
   NAMES_LIST,
   TYPE_OF_SERVICE,
-  generateMocks} from "./service";
+  generateMocks,
+  amountOfTempData} from "./service";
 
 import {getCity, getRandomCity, getRandomHotelLocation, Zoom} from "./city";
 
@@ -43,6 +44,6 @@ class Hotel {
   }
 }
 
-const mockHotels = generateMocks(Hotel, 40);
+const mockHotels = generateMocks(Hotel, amountOfTempData);
 
 export {mockHotels};

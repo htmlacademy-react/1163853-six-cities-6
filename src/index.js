@@ -4,22 +4,14 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {reducer} from './store/reducers/reducer';
-import {mockHotels} from './temp/hotel';
 
 import App from './components/app/app';
-import {generateComments} from './temp/service';
-
-const hotels = mockHotels;
-const comments = generateComments(hotels.length);
 
 const store = createStore(reducer, composeWithDevTools());
 
 ReactDOM.render(
     <Provider store={store}>
-      <App
-        hotels={hotels}
-        comments={comments}
-      />
+      <App/>
     </Provider>, document.querySelector(`#root`)
 );
 

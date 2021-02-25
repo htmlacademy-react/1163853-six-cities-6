@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {ActionCreator} from '../../store/action';
 import {connect} from 'react-redux';
 import {cityStructure, hotelStructure} from '../../utils/types';
 import {RenderType} from '../../utils/constants';
 import {City, getCity} from '../../temp/city';
-import {ActionCreator} from '../../store/action';
+import {getFilteredHotels} from '../../utils';
 
 import {Places, NoPlaces, Header} from '../../components';
 
 const ScreenMain = ({hotels, onClickHotel, activeCity, onClickTabLocation}) => {
 
-  // Эмуляция отсутствия отелей в Дюссельдорфе
-  const hotelsFilteredByCity = (activeCity.name === `Dusseldorf`) ? [] : hotels.filter(({cityName}) => cityName === activeCity.name);
+  const hotelsFilteredByCity = getFilteredHotels(activeCity.name, hotels);
 
   return (
     <div className="page page--gray page--main">
@@ -53,9 +53,7 @@ ScreenMain.propTypes = {
   onClickTabLocation: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  activeCity: state.activeCity,
-});
+const mapStateToProps = ({activeCity}) => ({activeCity});
 
 const mapDispatchToProps = (dispatch) => ({
   onClickTabLocation(newSelectedCity) {
