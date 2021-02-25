@@ -1,7 +1,7 @@
 export const ActionType = {
-  SET_HOTELS: `SET_HOTELS`,
-  SET_ACTIVE_CITY: `SET_ACTIVE_CITY`,
-  SET_COMMENTS: `SET_COMMENTS`,
+  SET_HOTELS: `reducer.initialState/setHotels`,
+  SET_COMMENTS: `reducer.initialState/setComments`,
+  SET_ACTIVE_CITY: `screenMain/setActiveCity`,
 };
 
 export const ActionCreator = {
@@ -20,3 +20,9 @@ export const ActionCreator = {
     payload: comments,
   }),
 };
+
+// Логика:
+// в mapDispatchToProps передаётся коллбэк
+// коллбэк вызывает dispatch, в котором вызывается необходимый action, а в action передаётся агрумент коллбэка как payload
+// затем dispatch вызывает reducer, reducer вызывает store
+// и на изменения store подписываются connect(mapStateToProps, mapDispatchToProps)
