@@ -14,7 +14,7 @@ const ScreenMain = ({hotels, onClickHotel, activeCity, onClickTabLocation}) => {
 
   return (
     <div className="page page--gray page--main">
-      <Header renderMainLogo={RenderType.MAIN_LOGO} />
+      <Header classNameForLogoLink={RenderType.MAIN_LOGO} />
       <main className={`page__main page__main--index ${!hotelsFilteredByCity.length && `page__main--index-empty`}`}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

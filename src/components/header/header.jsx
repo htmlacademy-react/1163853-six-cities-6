@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import {Logo} from '../../components';
 
-const Header = ({renderMainLogo}) => {
+const Header = ({classNameForLogoLink}) => {
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
-          <Logo renderMainLogo={renderMainLogo}/>
+          <Logo classNameForLogoLink={classNameForLogoLink}/>
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
@@ -27,7 +27,7 @@ const Header = ({renderMainLogo}) => {
 };
 
 Header.propTypes = {
-  renderMainLogo: PropTypes.string,
+  classNameForLogoLink: PropTypes.string,
 };
 
 export default Header;
