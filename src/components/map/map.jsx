@@ -55,7 +55,9 @@ const Map = ({mapType, city, hotels}) => {
   }, [lat, lng]);
 
   return (
-    <section className={`${mapType} map`} id="map" ref={mapRef} />
+    <div className="cities__right-section">
+      <section className={`${mapType} map`} id="map" ref={mapRef} />
+    </div>
   );
 };
 
