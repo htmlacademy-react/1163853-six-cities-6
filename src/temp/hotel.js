@@ -11,14 +11,17 @@ import {
   NAMES_LIST,
   TYPE_OF_SERVICE,
   generateMocks,
-  getRandomHotelLocation,
-  Zoom,
-  getRandomCity} from "./service";
+  amountOfTempData} from "./service";
+
+import {getCity, getRandomCity, getRandomHotelLocation, Zoom} from "./city";
 
 class Hotel {
   constructor(count) {
     this.id = String(count);
     this.cityName = getRandomCity();
+    this.cityLatitude = getCity(this.cityName).lat;
+    this.cityLongitude = getCity(this.cityName).lng;
+    this.cityZoom = Zoom;
     this.title = getRandomItem(TYPE_OF_HOTEL);
     this.images = getImages(this.title);
     this.preview = getImage(this.title);
@@ -41,6 +44,6 @@ class Hotel {
   }
 }
 
-const mockHotels = generateMocks(Hotel, 40);
+const mockHotels = generateMocks(Hotel, amountOfTempData);
 
 export {mockHotels};

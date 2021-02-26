@@ -4,9 +4,11 @@ import {
   randomDate,
   getRandomInteger,
   NAMES_LIST,
-  getAvatar} from "./service";
+  getAvatar,
+  generateComments,
+  amountOfTempData} from "./service";
 
-export class Comment {
+class Comment {
   constructor(count) {
     this.id = String(count);
     this.quote = getRandomItem(LIST_OF_TEXTS);
@@ -18,3 +20,7 @@ export class Comment {
     this.visitorIsPro = Boolean(getRandomInteger());
   }
 }
+
+const mockComments = generateComments(Comment, amountOfTempData);
+
+export {mockComments};

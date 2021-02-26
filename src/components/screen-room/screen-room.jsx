@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {useHistory} from 'react-router-dom';
 import {hotelStructure, reviewStructure} from '../../utils/types';
 import {RATING_MULTIPLIER, RenderType, JumpTo, MapType} from '../../utils/constants';
-import {getCity} from '../../temp/service';
+import {getPlace} from '../../utils';
 
 import {HotelsList, Review, Map, Header} from '../../components';
 
@@ -12,7 +12,7 @@ const ScreenRoom = ({hotel, hotels, comments}) => {
   const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
   const history = useHistory();
 
-  const currentCity = getCity(cityName);
+  const currentCity = getPlace(hotels, cityName);
   const threeNearestHotels = hotels.filter((item) => (item.id !== id) && (item.cityName === currentCity.name)).slice(0, 3);
 
   const handleClick = (activeHotelID) => {
