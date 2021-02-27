@@ -6,7 +6,7 @@ import {cityStructure, hotelStructure} from '../../utils/types';
 import {CitiesList, RenderType} from '../../utils/constants';
 import {getFilteredHotels, getPlace} from '../../utils';
 
-import {Places, NoPlaces, Header} from '../../components';
+import {Places, NoPlaces, Header} from '..';
 
 const ScreenMain = ({hotels, onClickHotel, activeCity, onClickTabLocation}) => {
 

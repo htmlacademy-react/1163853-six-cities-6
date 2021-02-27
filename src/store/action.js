@@ -3,6 +3,7 @@ export const ActionType = {
   SET_COMMENTS: `reducer.initialState/setComments`,
   SET_ACTIVE_CITY: `screenMain/setActiveCity`,
   HIGHLIGHT_HOTEL_ID: `hotel/highlightHotelID`,
+  SET_ACTIVE_SORT: `sortingPlaces/activeSort`,
 };
 
 export const ActionCreator = {
@@ -24,7 +25,12 @@ export const ActionCreator = {
   highlightHotelID: (id) => ({
     type: ActionType.HIGHLIGHT_HOTEL_ID,
     payload: id,
-  })
+  }),
+
+  setActiveSort: (sort) => ({
+    type: ActionType.SET_ACTIVE_SORT,
+    payload: sort,
+  }),
 };
 
 // Логика:
