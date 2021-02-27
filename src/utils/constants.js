@@ -36,8 +36,12 @@ export const MarkerType = {
     iconSize: [25, 35]
   },
   pinActive: {
-    iconUrl: `./img/pin-active2.svg`,
+    iconUrl: `./img/pin-active.svg`,
     iconSize: [35, 45]
+  },
+  pinHotelHighlighted: {
+    iconUrl: `./img/pin-hotel-highlighted.svg`,
+    iconSize: [25, 35]
   },
 };
 

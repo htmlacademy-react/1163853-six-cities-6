@@ -2,6 +2,7 @@ export const ActionType = {
   SET_HOTELS: `reducer.initialState/setHotels`,
   SET_COMMENTS: `reducer.initialState/setComments`,
   SET_ACTIVE_CITY: `screenMain/setActiveCity`,
+  HIGHLIGHT_HOTEL_ID: `hotel/highlightHotelID`,
 };
 
 export const ActionCreator = {
@@ -19,6 +20,11 @@ export const ActionCreator = {
     type: ActionType.SET_COMMENTS,
     payload: comments,
   }),
+
+  highlightHotelID: (id) => ({
+    type: ActionType.HIGHLIGHT_HOTEL_ID,
+    payload: id,
+  })
 };
 
 // Логика:

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {RATING_MULTIPLIER} from '../../utils/constants';
+import {ActionCreator} from '../../store/action';
 
 const Hotel = ({
   id,
@@ -15,6 +17,7 @@ const Hotel = ({
   isRenderFavoriteHotels,
   isRenderNearestHotels,
   onClickHotel,
+  onMouseOverHotel,
 }) => {
   const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
 
@@ -23,6 +26,10 @@ const Hotel = ({
       onClick={(evt) => {
         evt.preventDefault();
         onClickHotel(id);
+      }}
+      onMouseOver={(evt) => {
+        evt.preventDefault();
+        onMouseOverHotel(id);
       }}
       className={
         isRenderAllHotels && `cities__place-card place-card` ||
@@ -90,6 +97,14 @@ Hotel.propTypes = {
   isRenderFavoriteHotels: PropTypes.bool.isRequired,
   isRenderNearestHotels: PropTypes.bool.isRequired,
   onClickHotel: PropTypes.func.isRequired,
+  onMouseOverHotel: PropTypes.func.isRequired,
 };
 
-export default Hotel;
+const mapDispatchToProps = (dispatch) => ({
+  onMouseOverHotel(id) {
+    dispatch(ActionCreator.highlightHotelID(id));
+  }
+});
+
+export {Hotel};
+export default connect(null, mapDispatchToProps)(Hotel);

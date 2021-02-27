@@ -8,6 +8,7 @@ const initialState = {
   hotels: mockHotels,
   activeCity: getPlace(mockHotels, CitiesList[0]),
   comments: mockComments,
+  highlightHotelID: ``,
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,6 +20,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_ACTIVE_CITY:
       return extend(state, {
         activeCity: action.payload,
+      });
+    case ActionType.HIGHLIGHT_HOTEL_ID:
+      return extend(state, {
+        highlightHotelID: action.payload,
       });
     default:
       return state;
