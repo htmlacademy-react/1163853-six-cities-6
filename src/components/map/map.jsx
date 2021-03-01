@@ -1,5 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import leaflet from 'leaflet';
 import {cityStructure, hotelStructure} from '../../utils/types';
 import {MarkerType, NOT_INITIALIZED} from '../../utils/constants';
@@ -7,7 +8,39 @@ import {Zoom} from '../../temp/city';
 
 import "leaflet/dist/leaflet.css";
 
-const Map = ({mapType, city, hotels}) => {
+const createMarkers = (map, hotels, highlightHotelID) => {
+  const markers = [];
+  let prevId = NOT_INITIALIZED;
+
+  const pin = leaflet.icon(MarkerType.pin);
+  const pinActive = leaflet.icon(MarkerType.pinActive);
+  const pinHotelHighlighted = leaflet.icon(MarkerType.pinHotelHighlighted);
+
+  hotels.forEach(({id, latitude, longitude, title}) => {
+    markers[id] = leaflet.marker({lat: latitude, lng: longitude}, {icon: id !== highlightHotelID ? pin : pinHotelHighlighted})
+      .addTo(map)
+      .bindPopup(title);
+
+    markers[id].on(`click`, () => {
+      if (prevId !== -1) {
+        markers[prevId].setIcon(pin);
+      }
+
+      prevId = id;
+      markers[id].setIcon(pinActive);
+    });
+  });
+};
+
+const removeMarkers = (map) => {
+  map.eachLayer((layer) => {
+    if (layer instanceof leaflet.Marker) {
+      layer.remove();
+    }
+  });
+};
+
+const Map = ({mapType, city, hotels, highlightHotelID}) => {
   const {lat, lng} = city;
   const mapRef = useRef();
 
@@ -28,34 +61,23 @@ const Map = ({mapType, city, hotels}) => {
         })
         .addTo(mapRef.current);
 
-    const markers = [];
-    let prevPinID = NOT_INITIALIZED;
-
-    const pin = leaflet.icon(MarkerType.pin);
-    const pinActive = leaflet.icon(MarkerType.pinActive);
-
-    hotels.forEach(({id, latitude, longitude, title}) => {
-      markers[id] = leaflet.marker({lat: latitude, lng: longitude}, {icon: pin})
-        .addTo(mapRef.current)
-        .bindPopup(title);
-
-      markers[id].on(`click`, (evt) => {
-        if (prevPinID !== NOT_INITIALIZED) {
-          markers[prevPinID].setIcon(pin);
-        }
-
-        prevPinID = id;
-        evt.target.setIcon(pinActive);
-      });
-    });
+    createMarkers(mapRef.current, hotels, highlightHotelID);
 
     return () => {
       mapRef.current.remove();
     };
   }, [lat, lng]);
 
+  useEffect(() => {
+    removeMarkers(mapRef.current);
+
+    createMarkers(mapRef.current, hotels, highlightHotelID);
+  }, [highlightHotelID]);
+
   return (
-    <section className={`${mapType} map`} id="map" ref={mapRef} />
+    <div className="cities__right-section">
+      <section className={`${mapType} map`} id="map" ref={mapRef} />
+    </div>
   );
 };
 
@@ -63,9 +85,13 @@ Map.propTypes = {
   mapType: PropTypes.string.isRequired,
   city: PropTypes.shape(cityStructure).isRequired,
   hotels: PropTypes.arrayOf(hotelStructure).isRequired,
+  highlightHotelID: PropTypes.string.isRequired,
 };
 
-export default Map;
+const mapStateToProps = ({highlightHotelID}) => ({highlightHotelID});
+
+export {Map};
+export default connect(mapStateToProps, null)(Map);
 
 // city - город, на котором карта изначально сфокусирована
 // leaflet.marker.addTo - устанавливает маркер и привязывает к карте

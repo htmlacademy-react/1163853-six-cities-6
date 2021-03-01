@@ -1,4 +1,4 @@
-import {CitiesList} from "./constants";
+import {CitiesList, SortType} from "./constants";
 
 // Принимает массив отелей
 // Возвращает объект с ключами из городов и значениями из массивов гостиниц
@@ -25,3 +25,16 @@ export const extend = (expandable, ...payload) => Object.assign({}, expandable, 
 // Возвращает, если выбран Дюссельдорф, пустой массив, или массив отелей соответствующий названию города
 // XXX: Эмуляция отсутствия отелей в Дюссельдорфе. Впоследствии удалить.
 export const getFilteredHotels = (activeCityName, hotels) => (activeCityName === CitiesList[CitiesList.length - 1]) ? [] : hotels.filter(({cityName}) => cityName === activeCityName);
+
+// Принимает массив отелей и тип сортировки
+// Возвращает сортированный массив
+export const getSortedHotels = (hotels, sortType) => {
+  const copyHotels = hotels.slice();
+
+  return ({
+    [SortType.POPULAR]: () => hotels,
+    [SortType.PRICE_HIGH_TO_LOW]: () => copyHotels.sort((a, b) => b.price - a.price),
+    [SortType.PRICE_LOW_TO_HIGH]: () => copyHotels.sort((a, b) => a.price - b.price),
+    [SortType.TOP_RATED_FIRST]: () => copyHotels.sort((a, b) => b.rating - a.rating),
+  }[sortType]());
+};

@@ -30,14 +30,25 @@ export const ReviewLength = {
   MAX: 300
 };
 
+export const SortType = {
+  POPULAR: `Popular`,
+  PRICE_LOW_TO_HIGH: `Price: low to high`,
+  PRICE_HIGH_TO_LOW: `Price: high to low`,
+  TOP_RATED_FIRST: `Top rated first`
+};
+
 export const MarkerType = {
   pin: {
     iconUrl: `./img/pin.svg`,
     iconSize: [25, 35]
   },
   pinActive: {
-    iconUrl: `./img/pin-active2.svg`,
+    iconUrl: `./img/pin-active.svg`,
     iconSize: [35, 45]
+  },
+  pinHotelHighlighted: {
+    iconUrl: `./img/pin-hotel-highlighted.svg`,
+    iconSize: [25, 35]
   },
 };
 
