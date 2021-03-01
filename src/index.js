@@ -1,13 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {reducer} from './store/reducers/reducer';
+import {ActionCreator} from './store/action';
+import {AuthorizationStatus} from './utils/constants';
+import {checkAuth} from './store/api-action';
+import {createAPI} from './services/api';
 
 import App from './components/app/app';
 
-const store = createStore(reducer, composeWithDevTools());
+const api = createAPI(() => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)));
+
+const store = createStore(
+    reducer,
+    composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api)))
+);
+
+store.dispatch(checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>
@@ -15,6 +27,7 @@ ReactDOM.render(
     </Provider>, document.querySelector(`#root`)
 );
 
-// createStore - создаёт хранилище
-// передаём в createStore - ссылку на функцию, назовём её reducer, которая будет обновлять хранилище
+// createStore - создаёт хранилище. У него есть два аргумента:
+//    reducer - ссылка на функцию, которая будет обновлять хранилище
+//    composeWithDevTools - подключает devTools и в него же передаём applyMiddleware с сконфигурированным axios
 // Provider - обёртка, которая соединяет redux с react
