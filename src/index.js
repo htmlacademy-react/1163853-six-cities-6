@@ -27,6 +27,9 @@ ReactDOM.render(
     </Provider>, document.querySelector(`#root`)
 );
 
+// thunk - позволяет вызывать экшены в виде функций
+// createAPI - сконфигурированный api с коллбэком requireAuthorization,
+//    который будет вызываться в случае, если пользователь не авторизован
 // createStore - создаёт хранилище. У него есть два аргумента:
 //    reducer - ссылка на функцию, которая будет обновлять хранилище
 //    composeWithDevTools - подключает devTools и в него же передаём applyMiddleware с сконфигурированным axios

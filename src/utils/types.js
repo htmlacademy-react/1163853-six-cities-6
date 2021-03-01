@@ -20,7 +20,11 @@ export const hotelStructure = PropTypes.shape({
   hostName: PropTypes.string.isRequired,
   hostId: PropTypes.string.isRequired,
   services: PropTypes.arrayOf(PropTypes.string),
-  hostIsPro: PropTypes.bool.isRequired
+  hostIsPro: PropTypes.bool.isRequired,
+  hostAvatar: PropTypes.string.isRequired,
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired,
+  zoom: PropTypes.number.isRequired,
 }).isRequired;
 
 export const reviewStructure = PropTypes.shape({
@@ -41,4 +45,3 @@ export const cityStructure = {
     lng: PropTypes.number.isRequired,
   })
 };
-

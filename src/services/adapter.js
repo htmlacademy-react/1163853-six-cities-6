@@ -1,5 +1,5 @@
 const adaptOneHotelToClient = (hotel) => ({
-  id: hotel.id,
+  id: String(hotel.id),
   cityName: hotel.city.name,
   cityLatitude: hotel.city.location.latitude,
   cityLongitude: hotel.city.location.longitude,
@@ -17,7 +17,7 @@ const adaptOneHotelToClient = (hotel) => ({
   type: hotel.apartment,
   hostName: hotel.host.name,
   hostAvatar: hotel.host.avatar_url,
-  hostId: hotel.host.id,
+  hostId: String(hotel.host.id),
   services: hotel.goods,
   hostIsPro: hotel.host.is_pro,
   latitude: hotel.location.latitude,

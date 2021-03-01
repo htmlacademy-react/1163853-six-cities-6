@@ -5,6 +5,7 @@ export const ActionType = {
   HIGHLIGHT_HOTEL_ID: `hotel/highlightHotelID`,
   SET_ACTIVE_SORT: `sortingPlaces/activeSort`,
   REQUIRED_AUTHORIZATION: `user/requireAuthorization`,
+  LOADING_DATA: `loadingData`,
 };
 
 export const ActionCreator = {

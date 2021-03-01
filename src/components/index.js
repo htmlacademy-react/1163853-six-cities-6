@@ -12,3 +12,4 @@ export {default as Places} from './places/places';
 export {default as NoPlaces} from './no-places/no-places';
 export {default as SortingPlaces} from './sorting-places/sorting-places';
 export {default as Map} from './map/map';
+export {default as ScreenLoading} from './screen-loading/screen-loading';

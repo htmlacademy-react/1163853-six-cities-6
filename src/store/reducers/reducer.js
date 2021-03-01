@@ -5,13 +5,14 @@ import {mockComments} from '../../temp/comment';
 import {CitiesList, SortType, AuthorizationStatus} from '../../utils/constants';
 
 const initialState = {
-  // hotels: [],
-  hotels: mockHotels,
+  hotels: [],
+  // hotels: mockHotels,
   activeCity: getPlace(mockHotels, CitiesList[0]),
   comments: mockComments,
   highlightHotelID: ``,
   activeSort: SortType.POPULAR,
   authorizationStatus: AuthorizationStatus.NO_AUTH,
+  isDataLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,6 +27,8 @@ const reducer = (state = initialState, action) => {
       return {...state, activeSort: action.payload};
     case ActionType.REQUIRED_AUTHORIZATION:
       return {...state, authorizationStatus: action.payload};
+    case ActionType.LOADING_DATA:
+      return {...state, isDataLoaded: true};
     default:
       return state;
   }
