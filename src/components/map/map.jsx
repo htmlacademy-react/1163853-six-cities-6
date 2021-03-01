@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import leaflet from 'leaflet';
 import {cityStructure, hotelStructure} from '../../utils/types';
 import {MarkerType, NOT_INITIALIZED} from '../../utils/constants';
-import {Zoom} from '../../temp/city';
+// import {Zoom} from '../../temp/city';
 
 import "leaflet/dist/leaflet.css";
 
@@ -41,18 +41,18 @@ const removeMarkers = (map) => {
 };
 
 const Map = ({mapType, city, hotels, highlightHotelID}) => {
-  const {lat, lng} = city;
+  const {lat, lng, zoom} = city;
   const mapRef = useRef();
 
   useEffect(() => {
     mapRef.current = leaflet.map(`map`, {
       center: {lat, lng},
-      zoom: Zoom,
+      zoom,
       zoomControl: false,
       marker: true,
     });
 
-    mapRef.current.setView({lat, lng}, Zoom);
+    mapRef.current.setView({lat, lng}, zoom);
 
     leaflet.tileLayer(
         `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,

@@ -40,7 +40,6 @@ class Hotel {
     this.hostIsPro = Boolean(getRandomInteger());
     this.latitude = getRandomHotelLocation(this.cityName).latitude;
     this.longitude = getRandomHotelLocation(this.cityName).longitude;
-    this.zoom = Zoom;
   }
 }
 

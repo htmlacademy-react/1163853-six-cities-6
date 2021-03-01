@@ -5,6 +5,7 @@ import {mockComments} from '../../temp/comment';
 import {CitiesList, SortType, AuthorizationStatus} from '../../utils/constants';
 
 const initialState = {
+  // hotels: [],
   hotels: mockHotels,
   activeCity: getPlace(mockHotels, CitiesList[0]),
   comments: mockComments,
