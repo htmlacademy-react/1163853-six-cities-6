@@ -4,6 +4,7 @@ export const ActionType = {
   SET_ACTIVE_CITY: `screenMain/setActiveCity`,
   HIGHLIGHT_HOTEL_ID: `hotel/highlightHotelID`,
   SET_ACTIVE_SORT: `sortingPlaces/activeSort`,
+  REQUIRED_AUTHORIZATION: `user/requireAuthorization`,
 };
 
 export const ActionCreator = {
@@ -30,6 +31,11 @@ export const ActionCreator = {
   setActiveSort: (sort) => ({
     type: ActionType.SET_ACTIVE_SORT,
     payload: sort,
+  }),
+
+  requireAuthorization: (status) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status,
   }),
 };
 
