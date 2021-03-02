@@ -7,7 +7,7 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import {reducer} from './store/reducers/reducer';
 import {ActionCreator} from './store/action';
 import {AuthorizationStatus} from './utils/constants';
-import {checkAuth} from './store/api-action';
+import {checkAuth, fetchHotels} from './store/api-action';
 import {createAPI} from './services/api';
 
 import App from './components/app/app';
@@ -19,13 +19,16 @@ const store = createStore(
     composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api)))
 );
 
-store.dispatch(checkAuth());
-
-ReactDOM.render(
-    <Provider store={store}>
-      <App/>
-    </Provider>, document.querySelector(`#root`)
-);
+Promise.all([
+  store.dispatch(fetchHotels()),
+  store.dispatch(checkAuth()),
+]).then(() => {
+  ReactDOM.render(
+      <Provider store={store}>
+        <App/>
+      </Provider>, document.querySelector(`#root`)
+  );
+});
 
 // thunk - позволяет вызывать экшены в виде функций
 // createAPI - сконфигурированный api с коллбэком requireAuthorization,

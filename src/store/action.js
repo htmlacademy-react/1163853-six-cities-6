@@ -1,16 +1,15 @@
 export const ActionType = {
-  SET_HOTELS: `reducer.initialState/setHotels`,
+  LOAD_HOTELS: `reducer.initialState/loadData`,
   SET_COMMENTS: `reducer.initialState/setComments`,
   SET_ACTIVE_CITY: `screenMain/setActiveCity`,
   HIGHLIGHT_HOTEL_ID: `hotel/highlightHotelID`,
   SET_ACTIVE_SORT: `sortingPlaces/activeSort`,
   REQUIRED_AUTHORIZATION: `user/requireAuthorization`,
-  LOADING_DATA: `loadingData`,
 };
 
 export const ActionCreator = {
-  setHotels: (hotels) => ({
-    type: ActionType.SET_HOTELS,
+  loadHotels: (hotels) => ({
+    type: ActionType.LOAD_HOTELS,
     payload: hotels,
   }),
 

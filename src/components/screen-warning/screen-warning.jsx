@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {WarningType} from "../../utils/constants";
 
-const Warning = () => {
+const ScreenWarning = () => {
   const styleWarning = {
     textAlign: `center`,
     fontSize: `28px`,
@@ -18,4 +18,4 @@ const Warning = () => {
   );
 };
 
-export default Warning;
+export default ScreenWarning;

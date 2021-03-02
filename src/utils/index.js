@@ -9,8 +9,13 @@ export const getFavoriteHotelsCollection = (hotels) => hotels.reduce((total, hot
 }, {});
 
 // Получает перечень отелей и наименование города в виде строки
+// Если отелей нет, скорее всего, данные с сервера не загружены, тогда возвращает null
 // Возвращает полные данные города, извлеченные из первого обнаруженного отеля
 export const getPlace = (hotels, selectedCityName) => {
+  if (!hotels.length) {
+    return null;
+  }
+
   const {cityName: name, cityLatitude: lat, cityLongitude: lng, cityZoom: zoom} = hotels.find((hotel) => hotel.cityName === selectedCityName);
   return {name, lat, lng, zoom};
 };

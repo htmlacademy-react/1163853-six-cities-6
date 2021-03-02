@@ -5,19 +5,12 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {hotelStructure, reviewStructure} from '../../utils/types';
 import {getMatchingOffer} from '../../utils';
 import {JumpTo} from '../../utils/constants';
-import {fetchHotels} from '../../store/api-action';
 
-import {ScreenMain, ScreenLogin, ScreenFavorites, ScreenRoom, Warning, ScreenLoading} from '../../components';
+import {ScreenMain, ScreenLogin, ScreenFavorites, ScreenRoom, ScreenWarning, ScreenLoading} from '..';
 
-const App = ({hotels, comments, isDataLoaded, onLoadData}) => {
+const App = ({hotels, comments, isHotelsLoaded}) => {
 
-  React.useEffect(() => {
-    if (!isDataLoaded) {
-      onLoadData();
-    }
-  }, [isDataLoaded]);
-
-  if (!isDataLoaded) {
+  if (!isHotelsLoaded) {
     return (
       <ScreenLoading />
     );
@@ -63,7 +56,7 @@ const App = ({hotels, comments, isDataLoaded, onLoadData}) => {
           )}
         />
         <Route>
-          <Warning />
+          <ScreenWarning />
         </Route>
       </Switch>
     </BrowserRouter>
@@ -71,19 +64,12 @@ const App = ({hotels, comments, isDataLoaded, onLoadData}) => {
 };
 
 App.propTypes = {
-  hotels: PropTypes.arrayOf(hotelStructure).isRequired,
+  hotels: PropTypes.arrayOf(hotelStructure),
   comments: PropTypes.arrayOf(PropTypes.arrayOf(reviewStructure).isRequired).isRequired,
-  isDataLoaded: PropTypes.bool.isRequired,
-  onLoadData: PropTypes.func.isRequired,
+  isHotelsLoaded: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = ({hotels, comments, isDataLoaded}) => ({hotels, comments, isDataLoaded});
-
-const mapDispatchToProps = (dispatch) => ({
-  onLoadData() {
-    dispatch(fetchHotels);
-  }
-});
+const mapStateToProps = ({hotels, comments, isHotelsLoaded}) => ({hotels, comments, isHotelsLoaded});
 
 export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, null)(App);
