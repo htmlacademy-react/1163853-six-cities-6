@@ -16,7 +16,7 @@ export const RenderType = {
 
 export const WarningType = {
   INVALID_ADDRESS_BAR: `WHAT THE HELL IS GOING ON HERE`,
-  LOADING: `LOADING...`,
+  LOADING: `...LOADING...`,
 };
 
 export const JumpTo = {
