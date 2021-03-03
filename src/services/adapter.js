@@ -14,7 +14,7 @@ const adaptOneHotelToClient = (hotel) => ({
   price: hotel.price,
   rating: hotel.rating,
   description: hotel.description,
-  type: hotel.apartment,
+  type: hotel.type,
   hostName: hotel.host.name,
   hostAvatar: hotel.host.avatar_url,
   hostId: String(hotel.host.id),
