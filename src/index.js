@@ -1,20 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {reducer} from './store/reducers/reducer';
+import {ActionCreator} from './store/action';
+import {AuthorizationStatus} from './utils/constants';
+import {checkAuth, fetchHotels} from './store/api-action';
+import {createAPI} from './services/api';
 
 import App from './components/app/app';
 
-const store = createStore(reducer, composeWithDevTools());
+const api = createAPI(() => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)));
 
-ReactDOM.render(
-    <Provider store={store}>
-      <App/>
-    </Provider>, document.querySelector(`#root`)
+const store = createStore(
+    reducer,
+    composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api)))
 );
 
-// createStore - создаёт хранилище
-// передаём в createStore - ссылку на функцию, назовём её reducer, которая будет обновлять хранилище
+Promise.all([
+  store.dispatch(fetchHotels()),
+  store.dispatch(checkAuth()),
+]).then(() => {
+  ReactDOM.render(
+      <Provider store={store}>
+        <App/>
+      </Provider>, document.querySelector(`#root`)
+  );
+});
+
+// thunk - позволяет вызывать экшены в виде функций
+// createAPI - сконфигурированный api с коллбэком requireAuthorization,
+//    который будет вызываться в случае, если пользователь не авторизован
+// createStore - создаёт хранилище. У него есть два аргумента:
+//    reducer - ссылка на функцию, которая будет обновлять хранилище
+//    composeWithDevTools - подключает devTools и в него же передаём applyMiddleware с сконфигурированным axios
 // Provider - обёртка, которая соединяет redux с react

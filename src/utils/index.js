@@ -1,4 +1,4 @@
-import {CitiesList, SortType} from "./constants";
+import {SortType} from "./constants";
 
 // Принимает массив отелей
 // Возвращает объект с ключами из городов и значениями из массивов гостиниц
@@ -9,8 +9,13 @@ export const getFavoriteHotelsCollection = (hotels) => hotels.reduce((total, hot
 }, {});
 
 // Получает перечень отелей и наименование города в виде строки
+// Если отелей нет, скорее всего, данные с сервера не загружены, тогда возвращает null
 // Возвращает полные данные города, извлеченные из первого обнаруженного отеля
 export const getPlace = (hotels, selectedCityName) => {
+  if (!hotels.length) {
+    return null;
+  }
+
   const {cityName: name, cityLatitude: lat, cityLongitude: lng, cityZoom: zoom} = hotels.find((hotel) => hotel.cityName === selectedCityName);
   return {name, lat, lng, zoom};
 };
@@ -24,7 +29,7 @@ export const extend = (expandable, ...payload) => Object.assign({}, expandable, 
 // Принимает строку - имя выбранного фильма и массив отелей
 // Возвращает, если выбран Дюссельдорф, пустой массив, или массив отелей соответствующий названию города
 // XXX: Эмуляция отсутствия отелей в Дюссельдорфе. Впоследствии удалить.
-export const getFilteredHotels = (activeCityName, hotels) => (activeCityName === CitiesList[CitiesList.length - 1]) ? [] : hotels.filter(({cityName}) => cityName === activeCityName);
+export const getFilteredHotels = (activeCityName, hotels) => hotels.filter(({cityName}) => cityName === activeCityName);
 
 // Принимает массив отелей и тип сортировки
 // Возвращает сортированный массив
