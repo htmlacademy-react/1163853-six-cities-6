@@ -5,6 +5,7 @@ export const ActionType = {
   HIGHLIGHT_HOTEL_ID: `hotel/highlightHotelID`,
   SET_ACTIVE_SORT: `sortingPlaces/activeSort`,
   REQUIRED_AUTHORIZATION: `user/requireAuthorization`,
+  LOGOUT: `user/logout`,
 };
 
 export const ActionCreator = {
@@ -37,6 +38,11 @@ export const ActionCreator = {
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status,
   }),
+
+  logout: (status) => ({
+    type: ActionType.LOGOUT,
+    payload: status,
+  })
 };
 
 // Логика:

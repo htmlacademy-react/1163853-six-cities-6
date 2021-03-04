@@ -20,6 +20,11 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
 );
 
+export const logout = () => (dispatch, _getState, api) => (
+  api.get(`/logout`)
+    .then(() => dispatch(ActionCreator.logout(AuthorizationStatus.NO_AUTH)))
+);
+
 // Как это работает на примере асинхронного экшена fetchHotels.
 //    Это функция, которая возвращает другую функцию, которой thunk докидывает параметры dispatch, _getState, api
 //    это позволит передать middlewate этот api

@@ -1,5 +1,5 @@
 import {getPlace} from '../../utils';
-import {ActionType} from '../action';
+import {ActionCreator, ActionType} from '../action';
 import {mockComments} from '../../temp/comment';
 import {CitiesList, SortType, AuthorizationStatus} from '../../utils/constants';
 
@@ -25,6 +25,8 @@ const reducer = (state = initialState, action) => {
       return {...state, activeSort: action.payload};
     case ActionType.REQUIRED_AUTHORIZATION:
       return {...state, authorizationStatus: action.payload};
+    case ActionCreator.LOGOUT:
+      return {...status, authorizationStatus: action.payload};
     default:
       return state;
   }
