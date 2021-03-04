@@ -91,7 +91,7 @@ Hotel.propTypes = {
   preview: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   isFavorite: PropTypes.bool.isRequired,
-  type: PropTypes.string,
+  type: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   isRenderAllHotels: PropTypes.bool.isRequired,
   isRenderFavoriteHotels: PropTypes.bool.isRequired,
