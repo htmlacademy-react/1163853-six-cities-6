@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import {hotelStructure, reviewStructure} from '../../utils/types';
 import {getMatchingOffer} from '../../utils';
 import {JumpTo} from '../../utils/constants';
+import browserHistory from '../../browser-history';
 
 import {ScreenMain, ScreenLogin, ScreenFavorites, ScreenRoom, ScreenWarning, ScreenLoading, PrivateRoute} from '..';
 
@@ -17,7 +18,7 @@ const App = ({hotels, comments, isHotelsLoaded}) => {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route
           exact
@@ -47,11 +48,12 @@ const App = ({hotels, comments, isHotelsLoaded}) => {
         <Route
           exact
           path={`${JumpTo.OFFER}/:id`}
-          render={({match}) => (
+          render={({history, match}) => (
             <ScreenRoom
               hotel={getMatchingOffer(hotels, match)}
               hotels={hotels}
               comments={comments[match.params.id]}
+              onClickHotel={(id) => history.push(`${JumpTo.OFFER}/${id}`)}
             />
           )}
         />
@@ -73,3 +75,10 @@ const mapStateToProps = ({hotels, comments, isHotelsLoaded}) => ({hotels, commen
 
 export {App};
 export default connect(mapStateToProps, null)(App);
+
+
+// Router as BrowserRouter. Компонент `BrowserRouter` автоматически создаёт объект для работы с историей.
+// Раз так, то нам необходимо чтобы `Router` пользовался нашим экземпляром объекта `history`, а не собственным.
+// К сожалению, компонент `BrowserRouter` не позволяет этого сделать, но в пакете `react-router-dom` есть
+// другой компонент – `Router`. Основное его отличие от `BrowserRouter` — конфигурируемость.
+// Теперь, чтобы воспользоваться нашим экземпляром `history`, достаточно передать его в соответствующий пропс, в `history`.

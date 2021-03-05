@@ -1,23 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {useHistory} from 'react-router-dom';
 import {hotelStructure, reviewStructure} from '../../utils/types';
-import {RATING_MULTIPLIER, RenderType, JumpTo, MapType} from '../../utils/constants';
+import {RATING_MULTIPLIER, RenderType, MapType} from '../../utils/constants';
 import {getPlace} from '../../utils';
 
 import {HotelsList, Review, Map, Header} from '../../components';
 
-const ScreenRoom = ({hotel, hotels, comments}) => {
+const ScreenRoom = ({hotel, hotels, comments, onClickHotel}) => {
   const {id, isPremium, title, isFavorite, price, type, rating, images, bedrooms, adults, services, hostName, hostIsPro, description, cityName} = hotel;
   const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
-  const history = useHistory();
 
   const currentCity = getPlace(hotels, cityName);
   const threeNearestHotels = hotels.filter((item) => (item.id !== id) && (item.cityName === currentCity.name)).slice(0, 3);
-
-  const handleClick = (activeHotelID) => {
-    history.push(`${JumpTo.OFFER}/${activeHotelID}`);
-  };
 
   return (
     <div className="page">
@@ -130,7 +124,7 @@ const ScreenRoom = ({hotel, hotels, comments}) => {
             <HotelsList
               hotels={threeNearestHotels}
               renderType={RenderType.NEAR_HOTELS}
-              onClickHotel={handleClick}/>
+              onClickHotel={onClickHotel}/>
           </section>
         </div>
       </main>
@@ -142,6 +136,7 @@ ScreenRoom.propTypes = {
   hotel: PropTypes.shape(hotelStructure).isRequired,
   hotels: PropTypes.arrayOf(hotelStructure).isRequired,
   comments: PropTypes.arrayOf(reviewStructure).isRequired,
+  onClickHotel: PropTypes.func.isRequired,
 };
 
 export default ScreenRoom;
