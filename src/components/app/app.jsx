@@ -6,7 +6,7 @@ import {hotelStructure, reviewStructure} from '../../utils/types';
 import {getMatchingOffer} from '../../utils';
 import {JumpTo} from '../../utils/constants';
 
-import {ScreenMain, ScreenLogin, ScreenFavorites, ScreenRoom, ScreenWarning, ScreenLoading} from '..';
+import {ScreenMain, ScreenLogin, ScreenFavorites, ScreenRoom, ScreenWarning, ScreenLoading, PrivateRoute} from '..';
 
 const App = ({hotels, comments, isHotelsLoaded}) => {
 
@@ -34,7 +34,7 @@ const App = ({hotels, comments, isHotelsLoaded}) => {
           path={JumpTo.LOGIN}
           component={ScreenLogin}
         />
-        <Route
+        <PrivateRoute
           exact
           path={JumpTo.FAVORITES}
           render={({history}) => (
