@@ -6,6 +6,7 @@ export const ActionType = {
   SET_ACTIVE_SORT: `sortingPlaces/activeSort`,
   REQUIRED_AUTHORIZATION: `user/requireAuthorization`,
   LOGOUT: `user/logout`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
 
 export const ActionCreator = {
@@ -42,6 +43,11 @@ export const ActionCreator = {
   logout: (status) => ({
     type: ActionType.LOGOUT,
     payload: status,
+  }),
+
+  redirectToRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
   })
 };
 

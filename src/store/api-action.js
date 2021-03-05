@@ -1,5 +1,5 @@
 import {adaptAllHotelsToClient} from '../services/adapter';
-import {AuthorizationStatus} from '../utils/constants';
+import {AuthorizationStatus, JumpTo} from '../utils/constants';
 import {ActionCreator} from './action';
 
 export const fetchHotels = () => (dispatch, _getState, api) => (
@@ -22,7 +22,10 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
 
 export const logout = () => (dispatch, _getState, api) => (
   api.get(`/logout`)
-    .then(() => dispatch(ActionCreator.logout(AuthorizationStatus.NO_AUTH)))
+    .then(() => {
+      dispatch(ActionCreator.logout(AuthorizationStatus.NO_AUTH));
+      dispatch(ActionCreator.redirectToRoute(JumpTo.ROOT));
+    })
 );
 
 // Как это работает на примере асинхронного экшена fetchHotels.

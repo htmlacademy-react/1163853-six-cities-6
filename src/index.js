@@ -9,6 +9,7 @@ import {ActionCreator} from './store/action';
 import {AuthorizationStatus} from './utils/constants';
 import {checkAuth, fetchHotels} from './store/api-action';
 import {createAPI} from './services/api';
+import {redirect} from './store/middlewares/redirect';
 
 import App from './components/app/app';
 
@@ -16,7 +17,9 @@ const api = createAPI(() => store.dispatch(ActionCreator.requireAuthorization(Au
 
 const store = createStore(
     reducer,
-    composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api)))
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect))
 );
 
 Promise.all([
