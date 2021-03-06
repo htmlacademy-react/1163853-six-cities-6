@@ -1,10 +1,11 @@
 import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {login} from '../../store/api-action';
 
 import {Header} from '..';
 
-const ScreenLogin = (onSubmit) => {
+const ScreenLogin = ({onSubmit}) => {
   const loginRef = useRef();
   const passwordRef = useRef();
 
@@ -47,6 +48,7 @@ const ScreenLogin = (onSubmit) => {
                   type="password"
                   name="password"
                   placeholder="Password"
+                  autoComplete="off"
                   required=""/>
               </div>
               <button className="login__submit form__submit button" type="submit">Sign in</button>
@@ -71,7 +73,7 @@ ScreenLogin.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit(authData) {
-    dispatch(authData);
+    dispatch(login(authData));
   }
 });
 

@@ -17,14 +17,16 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(`/login`, {email, password})
-    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => {
+      dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+      dispatch(ActionCreator.redirectToRoute(JumpTo.ROOT));
+    })
 );
 
 export const logout = () => (dispatch, _getState, api) => (
   api.get(`/logout`)
     .then(() => {
       dispatch(ActionCreator.logout(AuthorizationStatus.NO_AUTH));
-      dispatch(ActionCreator.redirectToRoute(JumpTo.ROOT));
     })
 );
 

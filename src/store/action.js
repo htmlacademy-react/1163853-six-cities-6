@@ -6,7 +6,7 @@ export const ActionType = {
   SET_ACTIVE_SORT: `sortingPlaces/activeSort`,
   REQUIRED_AUTHORIZATION: `user/requireAuthorization`,
   LOGOUT: `user/logout`,
-  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+  REDIRECT_TO_ROUTE: `screenLogin/REDIRECT_TO_ROUTE`,
 };
 
 export const ActionCreator = {
