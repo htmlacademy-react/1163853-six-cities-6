@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import {AuthorizationStatus, JumpTo} from '../../utils/constants';
 
-import {Logo} from '../../components';
+import {Logo} from '..';
 
-const Header = ({classNameForLogoLink}) => {
+const Header = ({classNameForLogoLink, authorizationStatus}) => {
+  const path = (AuthorizationStatus.AUTH === authorizationStatus) ? JumpTo.ROOT : JumpTo.LOGIN;
+  const title = (AuthorizationStatus.AUTH === authorizationStatus) ? `You are logged in` : `Sign in`;
+
   return (
     <header className="header">
       <div className="container">
@@ -12,11 +18,13 @@ const Header = ({classNameForLogoLink}) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a className="header__nav-link header__nav-link--profile" href="#">
+                <Link
+                  to={path}
+                  className="header__nav-link header__nav-link--profile">
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
-                  <span className="header__login">Sign in</span>
-                </a>
+                  <span className="header__login">{title}</span>
+                </Link>
               </li>
             </ul>
           </nav>
@@ -28,6 +36,10 @@ const Header = ({classNameForLogoLink}) => {
 
 Header.propTypes = {
   classNameForLogoLink: PropTypes.string,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
-export default Header;
+const mapStateToProps = ({authorizationStatus}) => ({authorizationStatus});
+
+export {Header};
+export default connect(mapStateToProps, null)(Header);
