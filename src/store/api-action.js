@@ -10,6 +10,13 @@ export const fetchHotels = () => (dispatch, _getState, api) => (
   })
 );
 
+export const fetchNearbyHotels = (id) => (dispatch, _getState, api) => (
+  api.get(`${ServerRequest.HOTELS}/${id}${ServerRequest.NEARBY}`).then(({data}) => {
+    const nearbyHotels = adaptAllHotelsToClient(data);
+    dispatch(ActionCreator.loadNearestHotels(nearbyHotels));
+  })
+);
+
 export const fetchComments = (id) => (dispatch, _getState, api) => (
   api.get(`${ServerRequest.COMMENTS}${id}`).then(({data}) => {
     const comments = adaptAllCommentsToClient(data);

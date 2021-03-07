@@ -65,7 +65,7 @@ const Map = ({mapType, city, hotels, highlightHotelID}) => {
     return () => {
       mapRef.current.remove();
     };
-  }, [lat, lng]);
+  }, [lat, lng, hotels]);
 
   useEffect(() => {
     removeMarkers(mapRef.current);

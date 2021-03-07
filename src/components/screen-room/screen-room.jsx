@@ -4,19 +4,19 @@ import {connect} from 'react-redux';
 import {hotelStructure, reviewStructure} from '../../utils/types';
 import {RATING_MULTIPLIER, RenderType, MapType} from '../../utils/constants';
 import {getPlace} from '../../utils';
-import {fetchComments} from '../../store/api-action';
+import {fetchComments, fetchNearbyHotels} from '../../store/api-action';
 
 import {HotelsList, Review, Map, Header} from '../../components';
 
-const ScreenRoom = ({hotel, hotels, comments, onClickHotel, getIDForComments}) => {
+const ScreenRoom = ({hotel, hotels, nearbyHotels, comments, onClickHotel, getIDToServerRequest}) => {
   const {id, isPremium, title, isFavorite, price, type, rating, images, bedrooms, adults, services, hostName, hostIsPro, description, cityName} = hotel;
   const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
 
   const currentCity = getPlace(hotels, cityName);
-  const threeNearestHotels = hotels.filter((item) => (item.id !== id) && (item.cityName === currentCity.name)).slice(0, 3);
+  const threeNearestHotels = nearbyHotels.slice(0, 3);
 
   useEffect(() => {
-    getIDForComments(id);
+    getIDToServerRequest(id);
   }, [id]);
 
   return (
@@ -141,16 +141,18 @@ const ScreenRoom = ({hotel, hotels, comments, onClickHotel, getIDForComments}) =
 ScreenRoom.propTypes = {
   hotel: PropTypes.shape(hotelStructure).isRequired,
   hotels: PropTypes.arrayOf(hotelStructure).isRequired,
+  nearbyHotels: PropTypes.arrayOf(hotelStructure).isRequired,
   comments: PropTypes.arrayOf(reviewStructure).isRequired,
   onClickHotel: PropTypes.func.isRequired,
-  getIDForComments: PropTypes.func.isRequired,
+  getIDToServerRequest: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({comments}) => ({comments});
+const mapStateToProps = ({comments, nearbyHotels}) => ({comments, nearbyHotels});
 const mapDispatchToProps = (dispatch) => ({
-  getIDForComments(id) {
+  getIDToServerRequest(id) {
     dispatch(fetchComments(id));
-  }
+    dispatch(fetchNearbyHotels(id));
+  },
 });
 
 export {ScreenRoom};

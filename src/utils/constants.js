@@ -30,6 +30,7 @@ export const JumpTo = {
 export const ServerRequest = {
   HOTELS: `/hotels`,
   COMMENTS: `/comments/`,
+  NEARBY: `/nearby`,
 };
 
 export const ReviewLength = {

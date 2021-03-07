@@ -5,6 +5,7 @@ import {CitiesList, SortType, AuthorizationStatus} from '../../utils/constants';
 const initialState = {
   isHotelsLoaded: false,
   hotels: [],
+  nearbyHotels: [],
   activeHotel: {},
   activeCity: null,
   comments: [],
@@ -17,6 +18,8 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_HOTELS:
       return {...state, isHotelsLoaded: true, hotels: action.payload, activeCity: getPlace(action.payload, CitiesList[0])};
+    case ActionType.LOAD_NEARBY_HOTELS:
+      return {...state, nearbyHotels: action.payload};
     case ActionType.SET_ACTIVE_CITY:
       return {...state, activeCity: action.payload};
     case ActionType.HIGHLIGHT_HOTEL_ID:
