@@ -42,7 +42,7 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
 );
 
 export const logout = () => (dispatch, _getState, api) => (
-  api.get(ServerRequest.LOGIN)
+  api.get(ServerRequest.LOGOUT)
     .then(() => {
       dispatch(ActionCreator.logout(AuthorizationStatus.NO_AUTH));
     })
