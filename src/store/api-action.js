@@ -25,13 +25,16 @@ export const fetchComments = (id) => (dispatch, _getState, api) => (
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
-  api.get(`/login`)
-    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+  api.get(ServerRequest.LOGIN)
+    .then(({data}) => {
+      dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+      dispatch(ActionCreator.loadUserEmail(data[`email`]));
+    })
     .catch(() => {})
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
-  api.post(`/login`, {email, password})
+  api.post(ServerRequest.LOGIN, {email, password})
     .then(() => {
       dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       dispatch(ActionCreator.redirectToRoute(JumpTo.ROOT));
@@ -39,7 +42,7 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
 );
 
 export const logout = () => (dispatch, _getState, api) => (
-  api.get(`/logout`)
+  api.get(ServerRequest.LOGIN)
     .then(() => {
       dispatch(ActionCreator.logout(AuthorizationStatus.NO_AUTH));
     })

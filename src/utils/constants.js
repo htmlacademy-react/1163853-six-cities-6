@@ -29,6 +29,7 @@ export const JumpTo = {
 
 export const ServerRequest = {
   HOTELS: `/hotels`,
+  LOGIN: `/login`,
   COMMENTS: `/comments/`,
   NEARBY: `/nearby`,
 };

@@ -9,6 +9,7 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: `user/requireAuthorization`,
   LOGOUT: `user/logout`,
   REDIRECT_TO_ROUTE: `screenLogin/REDIRECT_TO_ROUTE`,
+  LOAD_USER_EMAIL: `server/loadUserEmail`,
 };
 
 export const ActionCreator = {
@@ -60,6 +61,11 @@ export const ActionCreator = {
   redirectToRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,
     payload: url,
+  }),
+
+  loadUserEmail: (email) => ({
+    type: ActionType.LOAD_USER_EMAIL,
+    payload: email,
   })
 };
 

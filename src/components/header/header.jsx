@@ -6,9 +6,9 @@ import {AuthorizationStatus, JumpTo} from '../../utils/constants';
 
 import {Logo} from '..';
 
-const Header = ({classNameForLogoLink, authorizationStatus}) => {
+const Header = ({classNameForLogoLink, authorizationStatus, userEmail}) => {
   const path = (AuthorizationStatus.AUTH === authorizationStatus) ? JumpTo.ROOT : JumpTo.LOGIN;
-  const title = (AuthorizationStatus.AUTH === authorizationStatus) ? `You are logged in` : `Sign in`;
+  const title = (AuthorizationStatus.AUTH === authorizationStatus) ? userEmail : `Sign in`;
 
   return (
     <header className="header">
@@ -37,9 +37,10 @@ const Header = ({classNameForLogoLink, authorizationStatus}) => {
 Header.propTypes = {
   classNameForLogoLink: PropTypes.string,
   authorizationStatus: PropTypes.string.isRequired,
+  userEmail: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({authorizationStatus}) => ({authorizationStatus});
+const mapStateToProps = ({authorizationStatus, userEmail}) => ({authorizationStatus, userEmail});
 
 export {Header};
 export default connect(mapStateToProps, null)(Header);

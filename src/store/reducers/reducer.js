@@ -12,6 +12,7 @@ const initialState = {
   highlightHotelID: ``,
   activeSort: SortType.POPULAR,
   authorizationStatus: AuthorizationStatus.NO_AUTH,
+  userEmail: ``,
 };
 
 const reducer = (state = initialState, action) => {
@@ -34,6 +35,8 @@ const reducer = (state = initialState, action) => {
       return {...state, comments: action.payload};
     case ActionType.SET_ACTIVE_HOTEL:
       return {...state, activeHotel: action.payload};
+    case ActionType.LOAD_USER_EMAIL:
+      return {...state, userEmail: action.payload};
     default:
       return state;
   }
