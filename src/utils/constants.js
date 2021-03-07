@@ -27,6 +27,11 @@ export const JumpTo = {
   OFFER: `/offer`,
 };
 
+export const ServerRequest = {
+  HOTELS: `/hotels`,
+  COMMENTS: `/comments/`,
+};
+
 export const ReviewLength = {
   MIN: 49,
   MAX: 300

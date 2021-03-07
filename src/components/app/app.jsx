@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
-import {hotelStructure, reviewStructure} from '../../utils/types';
+import {hotelStructure} from '../../utils/types';
 import {getMatchingOffer} from '../../utils';
 import {JumpTo} from '../../utils/constants';
 import browserHistory from '../../browser-history';
 
 import {ScreenMain, ScreenLogin, ScreenFavorites, ScreenRoom, ScreenWarning, ScreenLoading, PrivateRoute} from '..';
 
-const App = ({hotels, comments, isHotelsLoaded}) => {
+const App = ({hotels, isHotelsLoaded}) => {
 
   if (!isHotelsLoaded) {
     return (
@@ -52,7 +52,6 @@ const App = ({hotels, comments, isHotelsLoaded}) => {
             <ScreenRoom
               hotel={getMatchingOffer(hotels, match)}
               hotels={hotels}
-              comments={comments[match.params.id]}
               onClickHotel={(id) => history.push(`${JumpTo.OFFER}/${id}`)}
             />
           )}
@@ -67,11 +66,10 @@ const App = ({hotels, comments, isHotelsLoaded}) => {
 
 App.propTypes = {
   hotels: PropTypes.arrayOf(hotelStructure),
-  comments: PropTypes.arrayOf(PropTypes.arrayOf(reviewStructure).isRequired).isRequired,
   isHotelsLoaded: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = ({hotels, comments, isHotelsLoaded}) => ({hotels, comments, isHotelsLoaded});
+const mapStateToProps = ({hotels, isHotelsLoaded}) => ({hotels, isHotelsLoaded});
 
 export {App};
 export default connect(mapStateToProps, null)(App);

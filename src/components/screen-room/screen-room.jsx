@@ -1,17 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {hotelStructure, reviewStructure} from '../../utils/types';
 import {RATING_MULTIPLIER, RenderType, MapType} from '../../utils/constants';
 import {getPlace} from '../../utils';
+import {fetchComments} from '../../store/api-action';
 
 import {HotelsList, Review, Map, Header} from '../../components';
 
-const ScreenRoom = ({hotel, hotels, comments, onClickHotel}) => {
+const ScreenRoom = ({hotel, hotels, comments, onClickHotel, getIDForComments}) => {
   const {id, isPremium, title, isFavorite, price, type, rating, images, bedrooms, adults, services, hostName, hostIsPro, description, cityName} = hotel;
   const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
 
   const currentCity = getPlace(hotels, cityName);
   const threeNearestHotels = hotels.filter((item) => (item.id !== id) && (item.cityName === currentCity.name)).slice(0, 3);
+
+  useEffect(() => {
+    getIDForComments(id);
+  }, [id]);
 
   return (
     <div className="page">
@@ -137,6 +143,15 @@ ScreenRoom.propTypes = {
   hotels: PropTypes.arrayOf(hotelStructure).isRequired,
   comments: PropTypes.arrayOf(reviewStructure).isRequired,
   onClickHotel: PropTypes.func.isRequired,
+  getIDForComments: PropTypes.func.isRequired,
 };
 
-export default ScreenRoom;
+const mapStateToProps = ({comments}) => ({comments});
+const mapDispatchToProps = (dispatch) => ({
+  getIDForComments(id) {
+    dispatch(fetchComments(id));
+  }
+});
+
+export {ScreenRoom};
+export default connect(mapStateToProps, mapDispatchToProps)(ScreenRoom);

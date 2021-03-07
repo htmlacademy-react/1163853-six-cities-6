@@ -3,22 +3,18 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {RATING_MULTIPLIER} from '../../utils/constants';
 import {ActionCreator} from '../../store/action';
+import {hotelStructure} from '../../utils/types';
 
 const Hotel = ({
-  id,
-  isPremium,
-  title,
-  preview,
-  price,
-  isFavorite,
-  type,
-  rating,
+  hotel,
   isRenderAllHotels,
   isRenderFavoriteHotels,
   isRenderNearestHotels,
   onClickHotel,
   onMouseOverHotel,
+  onClickGetActiveHotel,
 }) => {
+  const {id, isPremium, title, preview, price, isFavorite, type, rating} = hotel;
   const styleRating = {width: `${rating * RATING_MULTIPLIER}%`};
 
   return (
@@ -26,6 +22,7 @@ const Hotel = ({
       onClick={(evt) => {
         evt.preventDefault();
         onClickHotel(id);
+        onClickGetActiveHotel(hotel);
       }}
       onMouseOver={(evt) => {
         evt.preventDefault();
@@ -85,25 +82,23 @@ const Hotel = ({
 };
 
 Hotel.propTypes = {
-  id: PropTypes.string.isRequired,
-  isPremium: PropTypes.bool.isRequired,
-  title: PropTypes.string.isRequired,
-  preview: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  isFavorite: PropTypes.bool.isRequired,
-  type: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
+  hotel: PropTypes.shape(hotelStructure).isRequired,
   isRenderAllHotels: PropTypes.bool.isRequired,
   isRenderFavoriteHotels: PropTypes.bool.isRequired,
   isRenderNearestHotels: PropTypes.bool.isRequired,
   onClickHotel: PropTypes.func.isRequired,
   onMouseOverHotel: PropTypes.func.isRequired,
+  onClickGetActiveHotel: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onMouseOverHotel(id) {
     dispatch(ActionCreator.highlightHotelID(id));
-  }
+  },
+
+  onClickGetActiveHotel(hotel) {
+    dispatch(ActionCreator.setActiveHotel(hotel));
+  },
 });
 
 export {Hotel};

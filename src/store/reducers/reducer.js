@@ -1,13 +1,13 @@
 import {getPlace} from '../../utils';
-import {ActionCreator, ActionType} from '../action';
-import {mockComments} from '../../temp/comment';
+import {ActionType} from '../action';
 import {CitiesList, SortType, AuthorizationStatus} from '../../utils/constants';
 
 const initialState = {
   isHotelsLoaded: false,
   hotels: [],
+  activeHotel: {},
   activeCity: null,
-  comments: mockComments,
+  comments: [],
   highlightHotelID: ``,
   activeSort: SortType.POPULAR,
   authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -25,8 +25,12 @@ const reducer = (state = initialState, action) => {
       return {...state, activeSort: action.payload};
     case ActionType.REQUIRED_AUTHORIZATION:
       return {...state, authorizationStatus: action.payload};
-    case ActionCreator.LOGOUT:
-      return {...status, authorizationStatus: action.payload};
+    case ActionType.LOGOUT:
+      return {...state, authorizationStatus: action.payload};
+    case ActionType.LOAD_COMMENTS:
+      return {...state, comments: action.payload};
+    case ActionType.SET_ACTIVE_HOTEL:
+      return {...state, activeHotel: action.payload};
     default:
       return state;
   }

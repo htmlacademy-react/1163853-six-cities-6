@@ -1,6 +1,7 @@
 export const ActionType = {
-  LOAD_HOTELS: `reducer.initialState/loadData`,
-  SET_COMMENTS: `reducer.initialState/setComments`,
+  LOAD_HOTELS: `server/loadHotels`,
+  SET_ACTIVE_HOTEL: `hotel/setActiveHotel`,
+  LOAD_COMMENTS: `server/loadComments`,
   SET_ACTIVE_CITY: `screenMain/setActiveCity`,
   HIGHLIGHT_HOTEL_ID: `hotel/highlightHotelID`,
   SET_ACTIVE_SORT: `sortingPlaces/activeSort`,
@@ -15,13 +16,18 @@ export const ActionCreator = {
     payload: hotels,
   }),
 
+  setActiveHotel: (hotel) => ({
+    type: ActionType.SET_ACTIVE_HOTEL,
+    payload: hotel,
+  }),
+
   setActiveCity: (activeCity) => ({
     type: ActionType.SET_ACTIVE_CITY,
     payload: activeCity,
   }),
 
-  setComments: (comments) => ({
-    type: ActionType.SET_COMMENTS,
+  loadComments: (comments) => ({
+    type: ActionType.LOAD_COMMENTS,
     payload: comments,
   }),
 
