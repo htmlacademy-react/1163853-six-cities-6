@@ -1,10 +1,15 @@
 export const ActionType = {
-  LOAD_HOTELS: `reducer.initialState/loadData`,
-  SET_COMMENTS: `reducer.initialState/setComments`,
+  LOAD_HOTELS: `server/loadHotels`,
+  LOAD_NEARBY_HOTELS: `server/loadNearbyHotels`,
+  SET_ACTIVE_HOTEL: `hotel/setActiveHotel`,
+  LOAD_COMMENTS: `server/loadComments`,
   SET_ACTIVE_CITY: `screenMain/setActiveCity`,
   HIGHLIGHT_HOTEL_ID: `hotel/highlightHotelID`,
   SET_ACTIVE_SORT: `sortingPlaces/activeSort`,
   REQUIRED_AUTHORIZATION: `user/requireAuthorization`,
+  LOGOUT: `user/logout`,
+  REDIRECT_TO_ROUTE: `screenLogin/REDIRECT_TO_ROUTE`,
+  LOAD_USER_EMAIL: `server/loadUserEmail`,
 };
 
 export const ActionCreator = {
@@ -13,13 +18,23 @@ export const ActionCreator = {
     payload: hotels,
   }),
 
+  loadNearestHotels: (hotels) => ({
+    type: ActionType.LOAD_NEARBY_HOTELS,
+    payload: hotels,
+  }),
+
+  setActiveHotel: (hotel) => ({
+    type: ActionType.SET_ACTIVE_HOTEL,
+    payload: hotel,
+  }),
+
   setActiveCity: (activeCity) => ({
     type: ActionType.SET_ACTIVE_CITY,
     payload: activeCity,
   }),
 
-  setComments: (comments) => ({
-    type: ActionType.SET_COMMENTS,
+  loadComments: (comments) => ({
+    type: ActionType.LOAD_COMMENTS,
     payload: comments,
   }),
 
@@ -37,6 +52,21 @@ export const ActionCreator = {
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status,
   }),
+
+  logout: (status) => ({
+    type: ActionType.LOGOUT,
+    payload: status,
+  }),
+
+  redirectToRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
+  }),
+
+  loadUserEmail: (email) => ({
+    type: ActionType.LOAD_USER_EMAIL,
+    payload: email,
+  })
 };
 
 // Логика:

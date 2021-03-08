@@ -19,7 +19,7 @@ const HotelsList = ({hotels, renderType, onClickHotel}) => {
           const {id} = hotel;
           return (
             <Hotel key={id}
-              {...hotel}
+              hotel={hotel}
               isRenderAllHotels={isRenderAllHotels}
               isRenderFavoriteHotels={isRenderFavoriteHotels}
               isRenderNearestHotels={isRenderNearestHotels}

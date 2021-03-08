@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import leaflet from 'leaflet';
 import {cityStructure, hotelStructure} from '../../utils/types';
 import {MarkerType, NOT_INITIALIZED} from '../../utils/constants';
-// import {Zoom} from '../../temp/city';
 
 import "leaflet/dist/leaflet.css";
 
@@ -66,7 +65,7 @@ const Map = ({mapType, city, hotels, highlightHotelID}) => {
     return () => {
       mapRef.current.remove();
     };
-  }, [lat, lng]);
+  }, [lat, lng, hotels]);
 
   useEffect(() => {
     removeMarkers(mapRef.current);

@@ -9,6 +9,7 @@ import {ActionCreator} from './store/action';
 import {AuthorizationStatus} from './utils/constants';
 import {checkAuth, fetchHotels} from './store/api-action';
 import {createAPI} from './services/api';
+import {redirect} from './store/middlewares/redirect';
 
 import App from './components/app/app';
 
@@ -16,7 +17,9 @@ const api = createAPI(() => store.dispatch(ActionCreator.requireAuthorization(Au
 
 const store = createStore(
     reducer,
-    composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api)))
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect))
 );
 
 Promise.all([
@@ -30,7 +33,7 @@ Promise.all([
   );
 });
 
-// thunk - позволяет вызывать экшены в виде функций
+// thunk - позволяет вызывать экшены в виде функций и сообщит в эти функции метод dispatch, _getState
 // createAPI - сконфигурированный api с коллбэком requireAuthorization,
 //    который будет вызываться в случае, если пользователь не авторизован
 // createStore - создаёт хранилище. У него есть два аргумента:
